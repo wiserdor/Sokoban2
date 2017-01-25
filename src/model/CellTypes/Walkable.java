@@ -1,7 +1,9 @@
-package CellTypes;
+package model.CellTypes;
+
 /**
  * 
- * this interface determine if the cell type that implements it can be walked on at the board
+ * this interface determine if the cell type that implements it can be walked on
+ * at the board
  *
  */
 

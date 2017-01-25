@@ -1,11 +1,11 @@
-package IO;
+package model.IO;
 
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import Levels.Level;
+import model.Levels.Level;
 
 public class MyXmlLevelLoader implements LevelLoader {
 	/**

@@ -1,4 +1,4 @@
-package Commands;
+package model.Commands;
 
 /**
  * Class operates the LevelLoader creator and contains the level
@@ -7,8 +7,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import IO.LevelLoadCreators;
-import Levels.Level;
+import model.IO.LevelLoadCreators;
+import model.Levels.Level;
 
 public class LoadCommand implements Commands {
 	private String filePath;

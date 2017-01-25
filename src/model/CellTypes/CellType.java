@@ -1,4 +1,4 @@
-package CellTypes;
+package model.CellTypes;
 
 /**
  * 

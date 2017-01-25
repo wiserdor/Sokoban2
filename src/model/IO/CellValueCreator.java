@@ -1,4 +1,4 @@
-package IO;
+package model.IO;
 /**
  * this class store the cell type char values
  */

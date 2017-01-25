@@ -1,12 +1,13 @@
-package CellTypes;
+package model.CellTypes;
+
 /**
- *   Class Contains Cell type hero data
+ * Class Contains Cell type hero data
  *
  */
 
 public class Hero extends CellType {
 
-	static Hero instance= null;
+	static Hero instance = null;
 
 	public Hero() {
 		super();

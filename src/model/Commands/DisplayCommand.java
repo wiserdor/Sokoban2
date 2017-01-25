@@ -1,4 +1,4 @@
-package Commands;
+package model.Commands;
 
 /**
  * Class operates the display of board
@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import IO.MyTextLevelSaver;
+import model.IO.MyTextLevelSaver;
 
 public class DisplayCommand implements Commands {
 	private LoadCommand levelHolder;

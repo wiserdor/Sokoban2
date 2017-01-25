@@ -1,4 +1,4 @@
-package Commands;
+package model.Commands;
 
 /**
  * Class Responsible to create interaction between the User input and the Command Classes

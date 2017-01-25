@@ -1,4 +1,4 @@
-package Commands;
+package model.Commands;
 
 /**
  * Class operating the Exit session

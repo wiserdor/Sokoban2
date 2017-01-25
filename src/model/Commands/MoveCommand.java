@@ -1,6 +1,6 @@
-package Commands;
+package model.Commands;
 
-import Levels.MySokobanPolicy;
+import model.Levels.MySokobanPolicy;
 
 public class MoveCommand implements Commands {
 	private LoadCommand levelHolder;

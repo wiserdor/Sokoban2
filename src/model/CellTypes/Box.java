@@ -1,4 +1,4 @@
-package CellTypes;
+package model.CellTypes;
 
 /**
  * 
@@ -9,8 +9,7 @@ public class Box extends CellType {
 	private char charType;
 
 	/**
-	 * Default constructor
-	 * sets box moving ability
+	 * Default constructor sets box moving ability
 	 */
 	public Box() {
 		super();

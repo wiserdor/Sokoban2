@@ -1,4 +1,4 @@
-package IO;
+package model.IO;
 /**
  * this class contains the varies creators of the
  *  level loader and creating loaders by demand

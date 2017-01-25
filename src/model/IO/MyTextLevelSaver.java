@@ -1,4 +1,4 @@
-package IO;
+package model.IO;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import CellTypes.CellType;
-import Levels.Level;
+import model.CellTypes.CellType;
+import model.Levels.Level;
 
 public class MyTextLevelSaver implements LevelSaver {
 	/**

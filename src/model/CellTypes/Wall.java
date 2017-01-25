@@ -1,8 +1,8 @@
-package CellTypes;
+package model.CellTypes;
 
 /**
  * 
- *   Class Contains Cell type wall data
+ * Class Contains Cell type wall data
  *
  */
 

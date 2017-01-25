@@ -1,4 +1,4 @@
-package IO;
+package model.IO;
 
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import Levels.Level;
+import model.Levels.Level;
 
 public class MyXmlLevelSaver implements LevelSaver {
 	/**

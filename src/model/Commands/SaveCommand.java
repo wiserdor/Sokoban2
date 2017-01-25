@@ -1,4 +1,4 @@
-package Commands;
+package model.Commands;
 /**
  * Class connects the current level to the matching saver
  */
@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import IO.LevelSaveCreators;
+import model.IO.LevelSaveCreators;
 
 public class SaveCommand implements Commands {
 	private LoadCommand levelHolder;

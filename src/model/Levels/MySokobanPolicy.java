@@ -1,11 +1,11 @@
-package Levels;
+package model.Levels;
 
 /**
  * the class determines the game rules and operating the moves according to those rules. 
  */
 import java.awt.Point;
 
-import Commands.LoadCommand;
+import model.Commands.LoadCommand;
 
 public class MySokobanPolicy {
 	private LoadCommand l;

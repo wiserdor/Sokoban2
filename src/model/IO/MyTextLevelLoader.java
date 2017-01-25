@@ -1,4 +1,4 @@
-package IO;
+package model.IO;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import CellTypes.Box;
-import CellTypes.CellType;
-import CellTypes.Floor;
-import CellTypes.Goal;
-import CellTypes.GoalBox;
-import CellTypes.Wall;
-import Levels.Level;
+import model.CellTypes.Box;
+import model.CellTypes.CellType;
+import model.CellTypes.Floor;
+import model.CellTypes.Goal;
+import model.CellTypes.GoalBox;
+import model.CellTypes.Wall;
+import model.Levels.Level;
+
+
 
 public class MyTextLevelLoader implements LevelLoader {
 	/**

@@ -1,16 +1,17 @@
 
-package Levels;
+package model.Levels;
 
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import CellTypes.Box;
-import CellTypes.CellType;
-import CellTypes.Floor;
-import CellTypes.Goal;
-import CellTypes.GoalBox;
-import CellTypes.Hero;
+import model.CellTypes.Box;
+import model.CellTypes.CellType;
+import model.CellTypes.Floor;
+import model.CellTypes.Goal;
+import model.CellTypes.GoalBox;
+import model.CellTypes.Hero;
+
 
 /**
  * The Level Class Purpose is to be a data holder 

@@ -1,7 +1,8 @@
-package CellTypes;
+package model.CellTypes;
 
 /**
- * this interface determine if the cell type that implements it can be moved on the board
+ * this interface determine if the cell type that implements it can be moved on
+ * the board
  *
  */
 
@@ -27,10 +28,9 @@ class CanMove implements Moveable {
 }
 
 /**
- *  * the class determined that the cell type can't be moved
-
+ * * the class determined that the cell type can't be moved
+ * 
  */
-
 
 class CantMove implements Moveable {
 

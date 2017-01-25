@@ -1,4 +1,5 @@
-package CellTypes;
+package model.CellTypes;
+
 /**
  * 
  * Class Contains Cell type goalbox data

@@ -1,4 +1,4 @@
-package IO;
+package model.IO;
 /**
  * Class save object type files
  * @see LevelSaver
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-import Levels.Level;
+import model.Levels.Level;
 
 public class MyObjectLevelSaver implements LevelSaver {
 	/**

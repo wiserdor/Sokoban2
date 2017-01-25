@@ -1,14 +1,12 @@
-package CellTypes;
+package model.CellTypes;
+
 /**
  * this class contains the varies creators of the
  *  CellType and creating CellType by demand
  */
 import java.util.HashMap;
 
-import IO.LevelLoader;
-import IO.MyObjectLevelLoader;
-import IO.MyTextLevelLoader;
-import IO.MyXmlLevelLoader;
+
 
 public class CellTypeCreators {
 
@@ -18,9 +16,10 @@ public class CellTypeCreators {
 	private interface Creator {
 		public CellType create();
 	}
-/**
- * default constructor 
- */
+
+	/**
+	 * default constructor
+	 */
 	public CellTypeCreators() {
 		MapCreator = new HashMap<String, Creator>();
 		MapCreator.put("Box", new BoxCreator());
@@ -30,9 +29,13 @@ public class CellTypeCreators {
 		MapCreator.put("Wall", new WallCreator());
 
 	}
+
 	/**
-	 *  getting the cell type and creating the matching creator and the matching CellType
-	 * @param CellType type as string
+	 * getting the cell type and creating the matching creator and the matching
+	 * CellType
+	 * 
+	 * @param CellType
+	 *            type as string
 	 * @return the matching CellType Creator
 	 */
 	public CellType CreateCell(String CellString) {
