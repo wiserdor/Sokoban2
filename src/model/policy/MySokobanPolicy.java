@@ -26,32 +26,7 @@ public class MySokobanPolicy {
 		this.Arrow = Arrow;
 		this.p = new Point(l.getLevel().getCharacterPosition());
 		this.pNext = new Point();
-		switch (Arrow) {
-		case "Right":
-		case "right":
-			p.setLocation(p.getX() + 1, p.getY());
-			;
-			pNext.setLocation(p.getX() + 1, p.getY());
-			break;
-		case "Left":
-		case "left":
-			p.setLocation(p.getX() - 1, p.getY());
-			pNext.setLocation(p.getX() - 1, p.getY());
-			break;
-		case "Up":
-		case "up":
-			p.setLocation(p.getX(), p.getY() - 1);
-			pNext.setLocation(p.getX(), p.getY() - 1);
-			break;
-		case "down":
-		case "Down":
-			p.setLocation(p.getX(), p.getY() + 1);
-			pNext.setLocation(p.getX(), p.getY() + 1);
-			break;
-
-		default:
-			break;
-		}
+		
 	}
 
 	/**
