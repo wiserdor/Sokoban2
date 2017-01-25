@@ -5,7 +5,7 @@ package model.policy;
  */
 import java.awt.Point;
 
-import model.Commands.LoadCommand;
+import controller.commands.LoadCommand;
 
 public class MySokobanPolicy {
 	private LoadCommand l;

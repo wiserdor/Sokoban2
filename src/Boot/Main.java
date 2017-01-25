@@ -1,7 +1,9 @@
-package model.Commands;
+package Boot;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import view.CLI;
 
 public class Main {
 

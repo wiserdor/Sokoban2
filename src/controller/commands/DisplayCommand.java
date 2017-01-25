@@ -1,4 +1,4 @@
-package model.Commands;
+package controller.commands;
 
 /**
  * Class operates the display of board

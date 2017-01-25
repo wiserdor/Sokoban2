@@ -1,4 +1,4 @@
-package model.Commands;
+package controller.commands;
 
 import model.policy.MySokobanPolicy;
 
