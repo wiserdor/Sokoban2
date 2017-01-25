@@ -6,9 +6,10 @@ package model.policy;
 import java.awt.Point;
 
 import controller.commands.LoadCommand;
+import model.data.level.Level;
 
 public class MySokobanPolicy {
-	private LoadCommand l;
+	private Level l;
 	private Point p;
 	private Point pNext;
 	private String Arrow;
@@ -21,7 +22,7 @@ public class MySokobanPolicy {
 	 * @param Arrow
 	 *            direction as received by the user
 	 */
-	public MySokobanPolicy(LoadCommand l, String Arrow) {
+	public MySokobanPolicy(Level l) {
 		this.l = l;
 		this.Arrow = Arrow;
 		this.p = new Point(l.getLevel().getCharacterPosition());
@@ -29,17 +30,49 @@ public class MySokobanPolicy {
 		
 	}
 
+	public Level getL() {
+		return l;
+	}
+
+	public void setL(LoadCommand l) {
+		this.l = l;
+	}
+
+	public Point getP() {
+		return p;
+	}
+
+	public void setP(Point p) {
+		this.p = p;
+	}
+
+	public Point getpNext() {
+		return pNext;
+	}
+
+	public void setpNext(Point pNext) {
+		this.pNext = pNext;
+	}
+
+	public String getArrow() {
+		return Arrow;
+	}
+
+	public void setArrow(String arrow) {
+		Arrow = arrow;
+	}
+
 	/**
 	 * Verifying the policy rules and executing the command
 	 */
 	public void move() {
-		if (l.getLevel().getBoardObjects().get(p).tryToWalk()) {			 // if you can walk on it just walk
-			l.getLevel().setCharacterPosition(p);
+		if (l.getBoardObjects().get(p).tryToWalk()) {			 // if you can walk on it just walk
+			l.setCharacterPosition(p);
 			System.out.println("Moving...");
 		} else {
-			if (l.getLevel().getBoardObjects().get(p).tryToMove()) { 		// if you can move it							
-				if (l.getLevel().getBoardObjects().get(pNext).tryToWalk()) {
-					l.getLevel().move(p, pNext); 							// check next point in that direction is walkable
+			if (l.getBoardObjects().get(p).tryToMove()) { 		// if you can move it							
+				if (l.getBoardObjects().get(pNext).tryToWalk()) {
+					l.move(p, pNext); 							// check next point in that direction is walkable
 													
 					System.out.println("Pushing...");
 				}
@@ -48,8 +81,8 @@ public class MySokobanPolicy {
 				System.out.println("Can't Move");
 			}
 		}
-		l.getLevel().refreshBoard();
-		if (l.getLevel().isFinished())
+		l.refreshBoard();
+		if (l.isFinished())
 			System.out.println("=============Congratulations!!! You Win!==============");
 	}
 }

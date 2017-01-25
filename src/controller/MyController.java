@@ -14,7 +14,7 @@ import controller.commands.SaveCommand;
 import model.Model;
 import view.View;
 
-public class MyController extends Observer implements Controller {
+public class MyController implements Controller {
 	private Model model;
 	private View view;
 	private BlockingQueue<Commands> queue;
