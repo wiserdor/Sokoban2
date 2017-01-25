@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import model.IO.LevelSaveCreators;
+import model.data.IO.LevelSaveCreators;
 
 public class SaveCommand implements Commands {
 	private LoadCommand levelHolder;

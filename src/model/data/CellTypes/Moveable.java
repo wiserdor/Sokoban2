@@ -1,4 +1,4 @@
-package model.CellTypes;
+package model.data.CellTypes;
 
 /**
  * this interface determine if the cell type that implements it can be moved on

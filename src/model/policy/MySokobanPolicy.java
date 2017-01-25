@@ -1,4 +1,4 @@
-package model.Levels;
+package model.policy;
 
 /**
  * the class determines the game rules and operating the moves according to those rules. 

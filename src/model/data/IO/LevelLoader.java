@@ -1,4 +1,4 @@
-package model.IO;
+package model.data.IO;
 /**
  *1. the separation between the data creator and the data holder, is achieved by creating different classes 
  *with different types of responsibilities:
@@ -23,7 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import model.Levels.Level;
+import model.data.level.Level;
 
 public interface LevelLoader {
 	public Level loadLevel(InputStream file) throws FileNotFoundException, IOException, ClassNotFoundException;

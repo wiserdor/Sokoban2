@@ -1,11 +1,11 @@
-package model.IO;
+package model.data.IO;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 
-import model.Levels.Level;
+import model.data.level.Level;
 
 /**
  * Class load object type files

@@ -1,10 +1,10 @@
-package model.IO;
+package model.data.IO;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import model.Levels.Level;
+import model.data.level.Level;
 
 public interface LevelSaver {
 

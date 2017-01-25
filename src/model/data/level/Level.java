@@ -1,16 +1,16 @@
 
-package model.Levels;
+package model.data.level;
 
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import model.CellTypes.Box;
-import model.CellTypes.CellType;
-import model.CellTypes.Floor;
-import model.CellTypes.Goal;
-import model.CellTypes.GoalBox;
-import model.CellTypes.Hero;
+import model.data.CellTypes.Box;
+import model.data.CellTypes.CellType;
+import model.data.CellTypes.Floor;
+import model.data.CellTypes.Goal;
+import model.data.CellTypes.GoalBox;
+import model.data.CellTypes.Hero;
 
 
 /**

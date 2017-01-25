@@ -1,4 +1,4 @@
-package model.IO;
+package model.data.IO;
 /**
  * this class store the cell type char values
  */

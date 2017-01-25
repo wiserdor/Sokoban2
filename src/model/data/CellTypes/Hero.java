@@ -1,4 +1,4 @@
-package model.CellTypes;
+package model.data.CellTypes;
 
 /**
  * Class Contains Cell type hero data

@@ -1,4 +1,4 @@
-package model.IO;
+package model.data.IO;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import model.CellTypes.Box;
-import model.CellTypes.CellType;
-import model.CellTypes.Floor;
-import model.CellTypes.Goal;
-import model.CellTypes.GoalBox;
-import model.CellTypes.Wall;
-import model.Levels.Level;
+import model.data.CellTypes.Box;
+import model.data.CellTypes.CellType;
+import model.data.CellTypes.Floor;
+import model.data.CellTypes.Goal;
+import model.data.CellTypes.GoalBox;
+import model.data.CellTypes.Wall;
+import model.data.level.Level;
 
 
 

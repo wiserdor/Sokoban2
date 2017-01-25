@@ -7,8 +7,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import model.IO.LevelLoadCreators;
-import model.Levels.Level;
+import model.data.IO.LevelLoadCreators;
+import model.data.level.Level;
 
 public class LoadCommand implements Commands {
 	private String filePath;

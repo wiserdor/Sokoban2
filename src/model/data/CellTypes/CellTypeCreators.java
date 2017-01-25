@@ -1,4 +1,4 @@
-package model.CellTypes;
+package model.data.CellTypes;
 
 /**
  * this class contains the varies creators of the

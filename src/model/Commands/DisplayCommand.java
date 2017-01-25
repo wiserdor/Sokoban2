@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import model.IO.MyTextLevelSaver;
+import model.data.IO.MyTextLevelSaver;
 
 public class DisplayCommand implements Commands {
 	private LoadCommand levelHolder;
