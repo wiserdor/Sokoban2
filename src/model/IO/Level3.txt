@@ -1,0 +1,10 @@
+LevelName Level3
+Difficulty 3
+LevelBoard
+###########
+#ooo #    #
+#o#  #@   ##
+#        @ ##
+#@   #	  @ #
+#A      #   #	   
+#############

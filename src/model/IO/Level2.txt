@@ -1,0 +1,10 @@
+LevelName Level2
+Difficulty 2
+LevelBoard
+#########
+#       #
+#  @   ##
+#A   o o#
+#  @   ##
+##      #
+#########

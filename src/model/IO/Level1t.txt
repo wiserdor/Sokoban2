@@ -1,0 +1,8 @@
+LevelName Level1
+Difficulty 1
+LevelBoard
+##########
+# # # # ##
+# o   @A #
+# # # # ##
+##########
