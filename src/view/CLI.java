@@ -1,60 +1,70 @@
 package view;
 
-import java.awt.Point;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Observable;
-import java.util.Scanner;
 
-import common.Position;
-import controller.commands.Commands;
-import model.data.CellTypes.CellType;
-import model.data.IO.CellValueCreator;
-
-/**
- * Class Responsible to create interaction between the User input and the Command Classes
- * 
- */
 
 
 public class CLI extends Observable implements View {
 
+	private BufferedReader reader;
+	private PrintWriter writer;
+	private String exitString;
 
-		@Override
-		public void start() {
-			Scanner scanner = new Scanner(System.in);
-			Thread thread = new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					while (true) {
-						System.out.println("Please enter a choice");
-						String cmdChoice = sc.nextLine();
-						String[] cmdSplit = cmdChoice.split(" ", 2);
-						setChanged();
-						notifyObservers(cmdSplit);
-						
-						if (commandLine.equals("exit"))
-							break;
-					}				
+	public CLI(BufferedReader reader, PrintWriter writer, String exitString) {
+		super();
+		this.reader = reader;
+		this.writer = writer;
+		this.exitString = exitString;
+	}
+
+	@Override
+	public void start() {
+		Thread thread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				String cmdChoice="";
+				while (true) {
+					writer.println("Please enter a choice");
+					writer.flush();
+					do{
+					try {
+						cmdChoice = reader.readLine();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String[] cmdSplit = cmdChoice.split(" ", 2);
+					setChanged();
+					notifyObservers(cmdSplit);
+
+					if (cmdChoice.equals("exit"))
+						break;
+					} while (!cmdChoice.equals(exitString));
 				}
-			});
-			thread.start();		
-		}
+			}
+		});
+		thread.start();
+	}
 
-		@Override
-		public void displayError(String msg) {
-			System.out.println("Error: " + msg);
-			
-		}
+	@Override
+	public void displayError(String msg) {
+		System.out.println("Error: " + msg);
 
-		@Override
-		public void display(CellType[][] arr, Point CharacterPosition) throws IOException {
-			
-		}
+	}
 
- 	
+	@Override
+		public void display(Character[][] board) {
+			for(int i=0;i<board.length;i++){
+				for(int j=0;j<board[i].length;j++)
+					writer.print(board[i][j]);
+				writer.println();
+			}
+			writer.flush();
+					
+		}
 
 }

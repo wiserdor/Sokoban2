@@ -2,10 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.util.Observable;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import commands.Command;
 import controller.commands.Commands;
 import controller.commands.DisplayCommand;
 import controller.commands.LoadCommand;
@@ -19,13 +19,14 @@ public class MyController implements Controller {
 	private View view;
 	private BlockingQueue<Commands> queue;
 	private boolean isStopped = false;
-	
+
 	public MyController(Model model, View view) {
 		this.model = model;
 		this.view = view;
+		queue = new ArrayBlockingQueue<Commands>(10);
+
 		start();
 	}
-
 
 	public void insertCommand(String[] cmdSplit) {
 		Commands cmd = null;
@@ -37,29 +38,29 @@ public class MyController implements Controller {
 			break;
 		case "display":
 		case "Display":
-			if (LevelHolder != null)
-				cmd = new DisplayCommand(LevelHolder);
+			cmd = new DisplayCommand(model, view);
 			break;
 		case "Move":
 		case "move":
-			if (LevelHolder != null)
-				cmd = new MoveCommand(LevelHolder, cmdSplit[1]);
+			cmd = new MoveCommand(model);
+			cmd.setParams(cmdSplit[1]);
 			break;
 		case "save":
 		case "Save":
-			if (LevelHolder != null)
-				cmd = new SaveCommand(LevelHolder, cmdSplit[1]);
+			cmd = new SaveCommand(model);
+			cmd.setParams(cmdSplit[1]);
 			break;
 		default:
 			cmd = null;
 			break;
 		}
-		try {
-			queue.put(cmd);
+		if (cmd != null)
+			try {
+				queue.put(cmd);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 
 	public void start() {
@@ -86,6 +87,7 @@ public class MyController implements Controller {
 	public void stop() {
 		isStopped = true;
 	}
+
 	public void update(Observable o, Object arg) {
 		String[] params = (String[]) arg;
 		insertCommand(params);
