@@ -4,9 +4,8 @@ package controller.commands;
  * Class operating the Exit session
  *
  */
-public class ExitCommand implements Commands {
+public class ExitCommand extends Commands {
 
-	@Override
 	public void execute() {
 		System.out.println("BYE!");
 
