@@ -24,8 +24,7 @@ public class MySokobanPolicy {
 	 */
 	public MySokobanPolicy(Level l) {
 		this.l = l;
-		this.Arrow = Arrow;
-		this.p = new Point(l.getLevel().getCharacterPosition());
+		this.p = new Point(l.getCharacterPosition());
 		this.pNext = new Point();
 		
 	}
@@ -34,7 +33,7 @@ public class MySokobanPolicy {
 		return l;
 	}
 
-	public void setL(LoadCommand l) {
+	public void setL(Level l) {
 		this.l = l;
 	}
 

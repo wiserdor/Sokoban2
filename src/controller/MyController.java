@@ -19,7 +19,6 @@ public class MyController implements Controller {
 	private View view;
 	private BlockingQueue<Commands> queue;
 	private boolean isStopped = false;
-	private LoadCommand LevelHolder;
 	
 	public MyController(Model model, View view) {
 		this.model = model;
@@ -33,8 +32,8 @@ public class MyController implements Controller {
 		switch (cmdSplit[0]) {
 		case "load":
 		case "Load":
-			LevelHolder = new LoadCommand(cmdSplit[1]);
-			cmd = LevelHolder;
+			cmd = new LoadCommand(model);
+			cmd.setParams(cmdSplit[1]);
 			break;
 		case "display":
 		case "Display":

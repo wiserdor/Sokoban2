@@ -1,10 +1,14 @@
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public interface Model {
 	public void move(String Arrow);
-	public void load(String path);
-	public void display(String path);
-	public void save(String path);
+	public void load(String path) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public Character[][] getDisplay() throws IOException;
+	public void save(String path) throws IOException;
 	
 	
 

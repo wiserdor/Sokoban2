@@ -3,34 +3,26 @@ package controller.commands;
 /**
  * Class operates the display of board
  */
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import model.Model;
+import view.View;
 
-import model.data.IO.MyTextLevelSaver;
+public class DisplayCommand extends Commands {
+	private Model model;
+	private View view;
 
-public class DisplayCommand implements Commands {
-	private LoadCommand levelHolder;
-
-	/**
-	 * Constructor must get levelHolder
-	 * @param levelHolder 
-	 */
-	public DisplayCommand(LoadCommand levelHolder) {
-		this.levelHolder = levelHolder;
+	public DisplayCommand(Model model, View view) {
+		this.model = model;
+		this.view = view;
 	}
-	/**
-	 * Class will send the console output stream into a class that can interpret 
-	 * the Level Board 
-	 * @see MyTextLevelSaver
-	 */
+
 	@Override
 	public void execute() throws IOException {
-		MyTextLevelSaver s = new MyTextLevelSaver();
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-		s.saveBoard(levelHolder.getLevel(), writer);
-		writer.flush();
-		;
+		Character[][] Board = model.getDisplay();
+		if (Board != null) {
+			view.display(Board);
+		} else
+			System.out.println("Please Load Level");
 	}
 
 }

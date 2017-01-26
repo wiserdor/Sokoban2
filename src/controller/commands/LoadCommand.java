@@ -1,59 +1,29 @@
 package controller.commands;
 
-/**
- * Class operates the LevelLoader creator and contains the level
- */
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
-import model.data.IO.LevelLoadCreators;
-import model.data.level.Level;
+import model.Model;
 
-public class LoadCommand implements Commands {
-	private String filePath;
-	private Level level;
-
+public class LoadCommand extends Commands {
+	private Model model;
+	
 	/**
 	 * Constructor must get file path
 	 * 
 	 * @param filePath
 	 *            the file path
 	 */
-	public LoadCommand(String filePath) {
+	public LoadCommand(Model model) {
 		super();
-		this.filePath = filePath;
+		this.model=model;
 	}
 
-	/**
-	 * will create Loader and send the level to it.
-	 * 
-	 * @see LevelLoadCreators
-	 * 
-	 */
 	public void execute() throws ClassNotFoundException, IOException {
-		InputStream in = new FileInputStream(filePath);
-		LevelLoadCreators lc = new LevelLoadCreators();
-		this.level = lc.CreateLoader(filePath).loadLevel(in);
+		
+		if(this.params!=null){
+			model.load(this.params);
+		}
 
-		// if(level!=null)
-
-	}
-
-	public final String getFilePath() {
-		return filePath;
-	}
-
-	public final void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	public final Level getLevel() {
-		return level;
-	}
-
-	public final void setLevel(Level level) {
-		this.level = level;
 	}
 
 }

@@ -1,32 +1,17 @@
 package controller.commands;
 
+import model.Model;
 import model.policy.MySokobanPolicy;
 
-public class MoveCommand implements Commands {
-	private LoadCommand levelHolder;
-	private String Arrow;
+public class MoveCommand extends Commands {
+	private Model model;
 
-	/**
-	 * Constructor must get levelHolder and Arrow
-	 * 
-	 * @param levelHolder
-	 *            the level object
-	 * @param Arrow
-	 *            the direction input by the user
-	 */
-	public MoveCommand(LoadCommand levelHolder, String Arrow) {
-		this.levelHolder = levelHolder;
-		this.Arrow = Arrow;
+	public MoveCommand(Model model) {
+		this.model = model;
 	}
 
-	/**
-	 * creates the move according to the policy of the current session
-	 * @see MySokobanPolicy
-	 */
 	public void execute() {
-
-		MySokobanPolicy m = new MySokobanPolicy(levelHolder, Arrow);
-		m.move();
+		model.move(params);
 
 	}
 
