@@ -4,7 +4,9 @@ package controller.commands;
  * Class operates the display of board
  */
 import java.io.IOException;
+
 import model.Model;
+import model.data.CellTypes.CellType;
 import view.View;
 
 public class DisplayCommand extends Commands {

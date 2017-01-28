@@ -3,6 +3,7 @@ package controller.commands;
 import java.io.IOException;
 
 import model.Model;
+import view.View;
 
 public class LoadCommand extends Commands {
 	private Model model;
@@ -16,6 +17,7 @@ public class LoadCommand extends Commands {
 	public LoadCommand(Model model) {
 		super();
 		this.model=model;
+		
 	}
 
 	public void execute() throws ClassNotFoundException, IOException {
