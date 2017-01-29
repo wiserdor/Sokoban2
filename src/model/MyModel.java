@@ -26,40 +26,16 @@ public class MyModel extends Observable implements Model {
 			System.out.println("please load a level");
 			return;
 		}
+		policy.move(Arrow);
 
-		switch (Arrow) {
-		case "Right":
-		case "right":
-			policy.getP().setLocation(policy.getP().getX() + 1, policy.getP().getY());
-			policy.getpNext().setLocation(policy.getP().getX() + 1, policy.getP().getY());
-			break;
-		case "Left":
-		case "left":
-			policy.getP().setLocation(policy.getP().getX() - 1, policy.getP().getY());
-			policy.getpNext().setLocation(policy.getP().getX() - 1, policy.getP().getY());
-			break;
-		case "Up":
-		case "up":
-			policy.getP().setLocation(policy.getP().getX(), policy.getP().getY() - 1);
-			policy.getpNext().setLocation(policy.getP().getX(), policy.getP().getY() - 1);
-			break;
-		case "down":
-		case "Down":
-			policy.getP().setLocation(policy.getP().getX(), policy.getP().getY() + 1);
-			policy.getpNext().setLocation(policy.getP().getX(), policy.getP().getY() + 1);
-			break;
-
-		default:
-			System.out.println("not a valid direction");
-			return;
-		}
-		policy.move();
 		this.setChanged();
+		this.notifyObservers(policy.isValid());
+
 	}
 
-	public MyModel(Level l,MySokobanPolicy policy) {
+	public MyModel(Level l, MySokobanPolicy policy) {
 		super();
-		this.l=l;
+		this.l = l;
 		this.policy = policy;
 	}
 
@@ -86,9 +62,9 @@ public class MyModel extends Observable implements Model {
 		Character[][] charBoard = new Character[l.getMaxY()][l.getMaxX()];
 		CellType[][] arr = l.getLevelBoard();
 		CellValueCreator cvc = new CellValueCreator();
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr[i].length; j++) {
-				if (l.isCharacterPosition(j, i))
+		for (int i = 0; i < l.getMaxY(); i++) {
+			for (int j = 0; j < l.getMaxX(); j++) {
+				if (policy.getL().isCharacterPosition(j, i))
 					charBoard[i][j] = 'A';
 				else
 					charBoard[i][j] = cvc.CreateValue(arr[i][j].getClass().toString());
@@ -106,6 +82,11 @@ public class MyModel extends Observable implements Model {
 		OutputStream out = new FileOutputStream(path);
 		LevelSaveCreators sc = new LevelSaveCreators();
 		sc.Createsaver(path).saveLevel(this.l, out);
+	}
+
+	@Override
+	public boolean isFinished() {
+		return l.isFinished();
 	}
 
 }

@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import controller.MyController;
 import model.MyModel;
 import view.CLI;
+import view.Main;
 
 public class Run {
 
@@ -14,13 +15,15 @@ public class Run {
 		MyModel model = new MyModel();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter writer = new PrintWriter(System.out);
-		CLI view = new CLI(reader, writer, "Exit");
-		MyController controller = new MyController(model, view);
+		CLI viewCLI = new CLI(reader, writer, "Exit");
+		
+		MyController controller = new MyController(model, viewCLI);
 		
 		model.addObserver(controller);
-		view.addObserver(controller);
+		viewCLI.addObserver(controller);
 		
-		view.start();
+		viewCLI.start();
+
 
 	}
 

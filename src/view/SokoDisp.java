@@ -2,8 +2,11 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
 
-import javafx.fxml.FXML;
+import com.sun.media.jfxmedia.Media;
+import com.sun.media.jfxmedia.MediaPlayer;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -22,25 +25,25 @@ public class SokoDisp extends Canvas{
 	public SokoDisp()
 	{
 		try {
-			wall = new Image(new FileInputStream("./resources/wall.png"));
+			wall = new Image(new FileInputStream("./resources/bush.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			pitHole = new Image(new FileInputStream("./resources/pitHole.jpg"));
+			pitHole = new Image(new FileInputStream("./resources/pithole2.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			bonePitHole = new Image(new FileInputStream("./resources/bonePitHole.jpg"));
+			bonePitHole = new Image(new FileInputStream("./resources/dog.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			bone = new Image(new FileInputStream("./resources/bone.png"));
+			bone = new Image(new FileInputStream("./resources/b.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,11 +55,12 @@ public class SokoDisp extends Canvas{
 			e.printStackTrace();
 		}
 		try {
-			kinder = new Image(new FileInputStream("./resources/kinder.jpeg"));
+			kinder = new Image(new FileInputStream("./resources/Kinder.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
 	private Image getImage(Character sign)
@@ -81,6 +85,8 @@ public class SokoDisp extends Canvas{
 	
 	public void setMaze(Character[][] maze) {
 		this.maze = maze;
+		this.setFocusTraversable(true);
+		this.setFocused(true);
 		redraw();
 	}
 	

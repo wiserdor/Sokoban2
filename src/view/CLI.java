@@ -57,7 +57,6 @@ public class CLI extends Observable implements View {
 
 	@Override
 	public void display(Character[][] board) {
-		// TODO Auto-generated method stub
 		/*for(int i=0;i<board.length;i++){
 		for(int j=0;j<board[i].length;j++)
 			writer.print(board[i][j]);
@@ -65,6 +64,12 @@ public class CLI extends Observable implements View {
 	}
 	writer.flush();
 		*/	
+	}
+
+	@Override
+	public void setWin() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

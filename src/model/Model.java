@@ -9,6 +9,7 @@ public interface Model {
 	public void load(String path) throws FileNotFoundException, ClassNotFoundException, IOException;
 	public Character[][] getDisplay() throws IOException;
 	public void save(String path) throws IOException;
+	public boolean isFinished();
 	
 	
 

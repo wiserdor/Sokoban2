@@ -89,8 +89,22 @@ public class MyController implements Controller {
 	}
 
 	public void update(Observable o, Object arg) {
-		String[] params = (String[]) arg;
-		insertCommand(params);
+		if (o.equals(view)) {
+			String[] params = (String[]) arg;
+			insertCommand(params);
+		} else if (o.equals(model)) {
+			if(model.isFinished()){
+				view.setWin();
+			}
+			if ((boolean) arg) {
+				try {
+					view.display(model.getDisplay());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 
 	}
 
