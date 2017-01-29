@@ -10,7 +10,8 @@ public class MoveCommand extends Commands {
 	}
 
 	public void execute() {
-		model.move(params);
+		if (params != null)
+			model.move(params);
 
 	}
 

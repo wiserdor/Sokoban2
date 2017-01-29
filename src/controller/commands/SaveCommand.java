@@ -12,14 +12,9 @@ public class SaveCommand extends Commands {
 		this.model=model;
 	}
 
-	/**
-	 * will create saver and send the level to the saver.
-	 * 
-	 * @see LevelSaveCreators
-	 * 
-	 */
 	@Override
 	public void execute() throws FileNotFoundException, IOException {
+		if (params != null)
 		model.save(params);
 		
 	}

@@ -75,7 +75,7 @@ public class MainWindowController extends Observable  implements View ,Initializ
 	public void openFile(){
 		FileChooser fc= new FileChooser();
 		fc.setTitle("open maze file");
-		fc.setInitialDirectory(new File("./resources"));
+		fc.setInitialDirectory(new File("./Levels"));
 		File chosen =fc.showOpenDialog(null);
 		if (chosen!=null){
 			String command = "Load";
