@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -8,21 +9,26 @@ import java.util.concurrent.TimeUnit;
 
 import controller.commands.Commands;
 import controller.commands.DisplayCommand;
+import controller.commands.ExitCommand;
 import controller.commands.LoadCommand;
 import controller.commands.MoveCommand;
 import controller.commands.SaveCommand;
+import controller.server.CLI;
+import controller.server.SokobanServer;
 import model.Model;
 import view.View;
 
 public class MyController implements Controller {
 	private Model model;
 	private View view;
+	private SokobanServer server;
 	private BlockingQueue<Commands> queue;
 	private boolean isStopped = false;
 
-	public MyController(Model model, View view) {
+	public MyController(Model model, View view,int port) {
 		this.model = model;
 		this.view = view;
+		this.server=new SokobanServer(port, new CLI(null, null, null));
 		queue = new ArrayBlockingQueue<Commands>(10);
 
 		start();
@@ -49,6 +55,10 @@ public class MyController implements Controller {
 		case "Save":
 			cmd = new SaveCommand(model);
 			cmd.setParams(cmdSplit[1]);
+			break;
+		case "exit":
+		case "Exit":
+			cmd = new ExitCommand(model,view);
 			break;
 		default:
 			cmd = null;
@@ -94,7 +104,12 @@ public class MyController implements Controller {
 			insertCommand(params);
 		} else if (o.equals(model)) {
 			if(model.isFinished()){
-				view.setWin();
+				try {
+					view.setWin();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if ((boolean) arg) {
 				try {

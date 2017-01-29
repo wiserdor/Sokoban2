@@ -1,10 +1,11 @@
 package view;
 
+import java.io.FileNotFoundException;
+
 public interface View {
 
 	public void start();
-	public void displayError(String msg);
 	public void display(Character[][] board);
-	public void setWin();
+	public void setWin() throws FileNotFoundException;
 
 }

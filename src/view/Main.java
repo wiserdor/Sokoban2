@@ -1,8 +1,5 @@
 package view;
 	
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 
 
 import controller.MyController;
@@ -27,7 +24,6 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			init(view);
 			primaryStage.show();	
-
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -35,16 +31,14 @@ public class Main extends Application {
 	
 	private void init(MainWindowController view) {
 		MyModel model = new MyModel();
-		MyController controller = new MyController(model, view);
+		MyController controller = new MyController(model, view,1234);
 		
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		PrintWriter writer = new PrintWriter(System.out);
-		CLI viewCLI = new CLI(reader, writer, "Exit");
 		model.addObserver(controller);
 		view.addObserver(controller);
 
 		view.start();	
+
 		
 	}
 	

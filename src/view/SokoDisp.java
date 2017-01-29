@@ -2,10 +2,6 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URL;
-
-import com.sun.media.jfxmedia.Media;
-import com.sun.media.jfxmedia.MediaPlayer;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -110,4 +106,13 @@ public class SokoDisp extends Canvas{
 		}
 		this.setFocused(true);
 	}
+	public void drawWin(){
+		GraphicsContext gc = this.getGraphicsContext2D();
+	
+		gc.clearRect(0, 0, 600, 600);
+		gc.fillRect(0, 0, 600, 600);
+		gc.drawImage(this.kinder, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+		this.setFocused(true);
+	}
+	
 }
