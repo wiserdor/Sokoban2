@@ -18,7 +18,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 
-public class MainWindowController extends Observable  implements View ,Initializable{
+public class MainWindowController extends Observable  implements View {
 	
 	@FXML
 	SokoDisp sokoDisp;
@@ -78,7 +78,7 @@ public class MainWindowController extends Observable  implements View ,Initializ
 	public void stop (){
 		this.player.stop();
 		this.finished.stop();
-		this.sokoDisp.setVisible(false);
+		this.sokoDisp.setDisable(true);
 	}
 	public void openFile(){
 		FileChooser fc= new FileChooser();
@@ -86,8 +86,11 @@ public class MainWindowController extends Observable  implements View ,Initializ
 		fc.setInitialDirectory(new File("./Levels"));
 		File chosen =fc.showOpenDialog(null);
 		if (chosen!=null){
-			if(sokoDisp.isDisable()){
-				sokoDisp.setDisable(false);
+			sokoDisp.setDisable(false);
+			if(win==true){
+				sokoDisp.isWin=false;
+				this.finished.stop();
+				win=false;
 			}
 			String command = "Load";
 			String[] s = new String[2];
@@ -123,15 +126,10 @@ public class MainWindowController extends Observable  implements View ,Initializ
 
 	@Override
 	public void display(Character[][] board) {
-		// TODO Auto-generated method stub
 		sokoDisp.setMaze(board);
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public void setWin() throws FileNotFoundException {
@@ -140,10 +138,8 @@ public class MainWindowController extends Observable  implements View ,Initializ
 			this.finished.play();
 			win=true;
 			sokoDisp.drawWin();
-			sokoDisp.setDisable(true);
 			
-			
-			
+	
 		}
 	}
 

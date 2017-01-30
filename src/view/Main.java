@@ -19,7 +19,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)loader.load();	
 			MainWindowController view = loader.getController();
 											
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,900,750);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			init(view);

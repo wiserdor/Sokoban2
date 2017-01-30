@@ -14,7 +14,7 @@
 
 <?import view.SokoDisp?>
 
-<BorderPane prefHeight="235.0" prefWidth="269.0"
+<BorderPane prefHeight="800" prefWidth="600"
 	xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="view.MainWindowController">
 	<top>

@@ -22,7 +22,7 @@ public class SokobanServer extends Observable {
 
 	private void runServer() throws IOException {
 		ServerSocket server = new ServerSocket(port);
-		server.setSoTimeout(1000);
+		server.setSoTimeout(10000);
 		while (!stop) {
 			try {
 				Socket aClient = server.accept();
