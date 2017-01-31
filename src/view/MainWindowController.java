@@ -1,17 +1,12 @@
 package view;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.Observable;
-import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -122,6 +117,10 @@ public class MainWindowController extends Observable  implements View {
 		command[0]="exit";
 		setChanged();
 		notifyObservers(command);
+	
+	}
+	public void exitGui(){
+		Platform.exit();
 	}
 
 	@Override

@@ -7,5 +7,6 @@ public interface View {
 	public void start();
 	public void display(Character[][] board);
 	public void setWin() throws FileNotFoundException;
+	public void exitGui();
 
 }

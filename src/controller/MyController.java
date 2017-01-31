@@ -58,7 +58,8 @@ public class MyController implements Controller {
 			break;
 		case "exit":
 		case "Exit":
-			cmd = new ExitCommand(model,view);
+			cmd = new ExitCommand(this,view);
+
 			break;
 		default:
 			cmd = null;

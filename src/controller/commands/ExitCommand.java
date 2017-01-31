@@ -1,6 +1,6 @@
 package controller.commands;
 
-import model.Model;
+import controller.Controller;
 import view.View;
 
 /**
@@ -8,18 +8,21 @@ import view.View;
  *
  */
 public class ExitCommand extends Commands {
-	private Model model;
+	private Controller controller;
 	private View view;
 	
-	public ExitCommand(Model model, View view) {
+	public ExitCommand(Controller controller, View view) {
 		super();
-		this.model = model;
+		this.controller=controller;
 		this.view = view;
 	}
 
 	public void execute() {
 		System.out.println("exiting");
-	
+		controller.stop();
+		view.exitGui();
+		
+		
 		
 	}
 
