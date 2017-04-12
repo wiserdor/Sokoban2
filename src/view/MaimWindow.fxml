@@ -6,28 +6,23 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<?import view.SokoDisp?>
+<?import view.SokoDisp?> 
 
-<BorderPane prefHeight="800" prefWidth="600"
-	xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="view.MainWindowController">
+<BorderPane prefHeight="800" prefWidth="600" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
 	<top>
 		<MenuBar BorderPane.alignment="CENTER">
 			<menus>
 				<Menu mnemonicParsing="false" text="File">
 					<items>
-						<MenuItem mnemonicParsing="false" onAction="#openFile"
-							text="Load File" />
-						<MenuItem mnemonicParsing="false" onAction="#saveFile"
-							text="Save File" />
+						<MenuItem mnemonicParsing="false" onAction="#openFile" text="Load File" />
+						<MenuItem mnemonicParsing="false" onAction="#saveFile" text="Save File" />
 
-						<MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
+						<MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="Edit">
@@ -46,10 +41,28 @@
 	<left>
 		<VBox spacing="5.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button focusTraversable="false" mnemonicParsing="false"
-					onAction="#start" prefHeight="25.0" prefWidth="68.0" text="start" />
-				<Button focusTraversable="false" mnemonicParsing="false"
-					onAction="#stop" prefHeight="25.0" prefWidth="69.0" text="stop" />
+				<Button focusTraversable="false" mnemonicParsing="false" onAction="#start" prefHeight="25.0" prefWidth="68.0" text="start" />
+				<Button focusTraversable="false" mnemonicParsing="false" onAction="#stop" prefHeight="25.0" prefWidth="69.0" text="stop" />
+            <Label text="Steps:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepsLbl" prefHeight="27.0" prefWidth="60.0" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Time:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="timerLbl" prefHeight="27.0" prefWidth="60.0" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
 
 			</children>
 			<BorderPane.margin>
@@ -69,7 +82,6 @@
 	</bottom>
 
 	<center>
-		<SokoDisp focusTraversable="true" fx:id="sokoDisp" height="600.0"
-			width="600.0" BorderPane.alignment="CENTER" />
+		<SokoDisp fx:id="sokoDisp" focusTraversable="true" height="600.0" width="600.0" BorderPane.alignment="CENTER" />
 	</center>
 </BorderPane>

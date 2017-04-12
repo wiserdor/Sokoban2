@@ -108,9 +108,8 @@ public class MySokobanPolicy {
 			break;
 		}
 		if (isValid) {
-			if (l.getBoardObjects().get(p).tryToWalk()) { // if you can walk on
-															// it just walk
-				l.setCharacterPosition(p);
+			if (l.getBoardObjects().get(p).tryToWalk()) { // if you can walk on								// it just walk
+				l.move(p,pNext);
 				System.out.println("Moving...");
 			} else {
 				if (l.getBoardObjects().get(p).tryToMove()) { // if you can move

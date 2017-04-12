@@ -114,7 +114,7 @@ public class MyController implements Controller {
 			}
 			if ((boolean) arg) {
 				try {
-					view.display(model.getDisplay());
+					view.display(model.getDisplay(),model.countSteps());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

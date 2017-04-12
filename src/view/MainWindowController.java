@@ -3,17 +3,18 @@ package view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Observable;
-import java.util.ResourceBundle;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -25,21 +26,70 @@ public class MainWindowController extends Observable implements View {
 
 	@FXML
 	SokoDisp sokoDisp;
+	@FXML
+	Label stepsLbl;
+	@FXML
+	Label timerLbl;
+	AnimationTimer clock;
+	private int steps;
+	boolean timerOn;
 	boolean win;
 	private Media startMp3 = new Media(new File("./resources/start1.mp3").toURI().toString());
 	private Media winMp3 = new Media(new File("./resources/win.mp3").toURI().toString());
 	private MediaPlayer player = new MediaPlayer(startMp3);
 	private MediaPlayer finished = new MediaPlayer(winMp3);
 
+	public void startTimer() {
+		timerOn = true;
+		clock = new AnimationTimer() {
+			private long timestamp;
+			private long time = 0;
+			private long fraction = 0;
+
+			@Override
+			public void start() {
+				// current time adjusted by remaining time from last run
+				timestamp = System.currentTimeMillis() - fraction;
+
+			}
+
+			@Override
+			public void stop() {
+				// save leftover time not handled with the last update
+				fraction = System.currentTimeMillis() - timestamp;
+			}
+
+			@Override
+			public void handle(long now) {
+				long newTime = System.currentTimeMillis();
+				if (timestamp + 1000 <= newTime) {
+					long deltaT = (newTime - timestamp) / 1000;
+					time += deltaT;
+					timestamp += 1000 * deltaT;
+					timerLbl.setText(Long.toString(time));
+				}
+			}
+		};
+		clock.start();
+	}
+
+	public void stopTimer() {
+		timerOn = false;
+		clock.stop();
+	}
+
 	public MainWindowController() {
 		win = false;
+		
 		sokoDisp = new SokoDisp();
+		timerOn = false;
 
 	}
 
 	public void start() {
 		String command = "Display";
 		String[] s = new String[1];
+		stepsLbl.setText("0");
 		s[0] = command;
 		this.setChanged();
 		this.notifyObservers(s);
@@ -58,20 +108,19 @@ public class MainWindowController extends Observable implements View {
 				} else if (event.getCode() == KeyCode.DOWN) {
 					direction = "down";
 				}
-
 				String command = "Move";
 				String[] s = new String[2];
 				s[0] = command;
 				s[1] = direction;
-				// sokoDisp.redraw();
 				setChanged();
 				notifyObservers(s);
-
+				
 			}
 		});
+		
 		this.setChanged();
 		this.notifyObservers(s);
-
+		
 	}
 
 	public void stop() {
@@ -134,6 +183,17 @@ public class MainWindowController extends Observable implements View {
 	@Override
 	public void display(Character[][] board) {
 		sokoDisp.setMaze(board);
+	}
+	@Override
+	public void display(Character[][] board, int steps) {
+		this.steps = steps;
+		sokoDisp.setMaze(board);
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	stepsLbl.setText(Integer.toString(steps));                          
+	        }
+	   });
 	}
 
 	@Override

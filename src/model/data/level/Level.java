@@ -12,11 +12,10 @@ import model.data.CellTypes.Goal;
 import model.data.CellTypes.GoalBox;
 import model.data.CellTypes.Hero;
 
-
 /**
- * The Level Class Purpose is to be a data holder 
- * which means that she will have all the information of the level itself and 
- * will have the ability to change the data itself.
+ * The Level Class Purpose is to be a data holder which means that she will have
+ * all the information of the level itself and will have the ability to change
+ * the data itself.
  * 
  */
 public class Level implements Serializable {
@@ -31,7 +30,9 @@ public class Level implements Serializable {
 
 	/**
 	 * Class constructor must be given parameters.
-	 * @param levelName Desired name to set for the level.
+	 * 
+	 * @param levelName
+	 *            Desired name to set for the level.
 	 * @param difficulty
 	 * @param characterPosition
 	 * @param boardObjects
@@ -49,12 +50,13 @@ public class Level implements Serializable {
 		CharacterPosition = characterPosition;
 		BoardObjects = boardObjects;
 		LevelBoard = levelBoard;
-		this.maxX = maxX;    
+		this.maxX = maxX;
 		this.maxY = maxY;
-		this.steps=0;
+		this.steps = 0;
 	}
+
 	/**
-	 * default constructor 
+	 * default constructor
 	 */
 	public Level() {
 		this.levelName = null;
@@ -67,16 +69,19 @@ public class Level implements Serializable {
 		// ConutObjects.put(GoalBox.class.getSimpleName(), 0);
 		// ConutObjects.put(Hero.class.getSimpleName(), 0);
 		LevelBoard = null;
-		this.steps=0;
+		this.steps = 0;
 		this.setCharacterPosition(null);
 
 	}
+
 	public int getSteps() {
 		return steps;
 	}
-	public void incStep(){
+
+	public void incStep() {
 		this.steps++;
 	}
+
 	public String getLevelName() {
 		return levelName;
 	}
@@ -108,9 +113,10 @@ public class Level implements Serializable {
 	public void setLevelBoard(CellType[][] levelBoard) {
 		LevelBoard = levelBoard;
 	}
+
 	/**
 	 * 
-	 * @return the max value of the of the objects array 
+	 * @return the max value of the of the objects array
 	 */
 	public int getMaxX() {
 		return maxX;
@@ -127,6 +133,7 @@ public class Level implements Serializable {
 	public void setMaxY(int maxY) {
 		this.maxY = maxY;
 	}
+
 	/**
 	 * 
 	 * @return the character position
@@ -134,23 +141,29 @@ public class Level implements Serializable {
 	public Point getCharacterPosition() {
 		return CharacterPosition;
 	}
+
 	public void setCharacterPosition(Point characterPosition) {
 		CharacterPosition = characterPosition;
 
 	}
+
 	/**
 	 * Put Cell type into a point
-	 * @param point the position of the object on the board		
-	 * @param c the cell type
+	 * 
+	 * @param point
+	 *            the position of the object on the board
+	 * @param c
+	 *            the cell type
 	 */
 	public void createCell(Point point, CellType c) {
 		this.BoardObjects.put(point, c);
 		// this.ConutObjects.put(c.getClass().getSimpleName(),
 		// ConutObjects.get(c)+1);
 	}
-	
+
 	/**
 	 * the same as createCell method, but with x and y values
+	 * 
 	 * @param x
 	 * @param y
 	 * @param c
@@ -163,7 +176,7 @@ public class Level implements Serializable {
 		// ConutObjects.get(c)+1);
 	}
 
-	/** 
+	/**
 	 * creating the board with the data on the hash map
 	 */
 	public void createBoard() {
@@ -175,56 +188,68 @@ public class Level implements Serializable {
 
 		}
 	}
+
 	/**
-	 * Will Refresh the Object array with the Board Object hashMap */
+	 * Will Refresh the Object array with the Board Object hashMap
+	 */
 	public void refreshBoard() {
 		for (Point p : this.BoardObjects.keySet()) {
 			this.LevelBoard[(int) p.getY()][(int) p.getX()] = this.BoardObjects.get(p);
 		}
 		this.LevelBoard[(int) getCharacterPosition().getY()][(int) getCharacterPosition().getX()] = new Hero();
 	}
-	
+
 	/**
-	 * moving the cell types on the board by changing the values at the key points.
-	 * @param p the origin point 
-	 * @param pNext the destination point 
+	 * moving the cell types on the board by changing the values at the key
+	 * points.
+	 * 
+	 * @param p
+	 *            the origin point
+	 * @param pNext
+	 *            the destination point
 	 */
 	public void move(Point p, Point pNext) {
-		if (this.BoardObjects.get(p) instanceof GoalBox) { 			//Pushing GoalBox
-			if (this.BoardObjects.get(pNext) instanceof Goal) {		//To Goal
+		if (this.BoardObjects.get(p).tryToWalk())
+			setCharacterPosition(p);
+		else if (this.BoardObjects.get(p) instanceof GoalBox) { // Pushing
+																// GoalBox
+			if (this.BoardObjects.get(pNext) instanceof Goal) { // To Goal
 				this.BoardObjects.put(pNext, new GoalBox());
 				this.BoardObjects.put(p, new Goal());
 				this.setCharacterPosition(p);
-			} else {												//To Floor
+			} else { // To Floor
 				this.BoardObjects.put(pNext, new Box());
 				this.BoardObjects.put(p, new Goal());
 				this.setCharacterPosition(p);
-			}														//Pushing Box
-		} else if (this.BoardObjects.get(pNext) instanceof Goal){    //To Goal
+			} // Pushing Box
+		} else if (this.BoardObjects.get(pNext) instanceof Goal) { // To Goal
 			this.BoardObjects.put(pNext, new GoalBox());
 			this.BoardObjects.put(p, new Floor());
 			this.setCharacterPosition(p);
-		}else{
-			this.BoardObjects.put(pNext, this.BoardObjects.get(p));	//To Floor
+		} else {
+			this.BoardObjects.put(pNext, this.BoardObjects.get(p)); // To Floor
 			this.BoardObjects.put(p, new Floor());
 			this.setCharacterPosition(p);
 		}
 		this.incStep();
 	}
-	
+
 	/**
-	 * Will get a point and will return true if it is the character position**/ 
+	 * Will get a point and will return true if it is the character position
+	 **/
 	public boolean isCharacterPosition(int x, int y) {
 		return getCharacterPosition().equals(new Point(x, y));
 	}
-	
-	/** 
-	 * Returns true if there are no boxes  on the board (end of game)
+
+	/**
+	 * Returns true if there are no boxes on the board (end of game)
+	 * 
 	 * @return true if there are no boxes
-	 *  */
-	public boolean isFinished(){
-		for(Point p:BoardObjects.keySet()){
-			if(this.BoardObjects.get(p).getType() instanceof Goal) return false;
+	 */
+	public boolean isFinished() {
+		for (Point p : BoardObjects.keySet()) {
+			if (this.BoardObjects.get(p).getType() instanceof Goal)
+				return false;
 		}
 		return true;
 	}
