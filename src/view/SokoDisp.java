@@ -2,13 +2,21 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-public class SokoDisp extends Canvas {
+public class SokoDisp extends Canvas implements Initializable {
 
 	private Character[][] maze;
 	boolean isWin;
@@ -19,7 +27,7 @@ public class SokoDisp extends Canvas {
 	Image bone = null;
 	Image floor = null;
 	Image kinder = null;
-
+	
 	public SokoDisp() {
 		isWin = false;
 		try {
@@ -96,6 +104,7 @@ public class SokoDisp extends Canvas {
 		if (maze != null) {
 
 			GraphicsContext gc = this.getGraphicsContext2D();
+			
 			double W = getWidth();
 			double H = getHeight();
 			double w = W / maze[0].length;
@@ -112,6 +121,7 @@ public class SokoDisp extends Canvas {
 				gc.clearRect(0, 0, W, H);
 				gc.drawImage(win, 150, 0, 360, 640);
 				
+				
 			}
 		}
 		this.setFocused(true);
@@ -121,7 +131,31 @@ public class SokoDisp extends Canvas {
 	public void drawWin() {
 		isWin = true;
 		redraw();
-
+		getLeaderBoard();
+	}
+	public void getLeaderBoard() {
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	try {
+	    			FXMLLoader fl = new FXMLLoader(getClass().getResource("LeaderBoard.fxml"));
+	    			Parent root1=(Parent)fl.load();
+	    			Stage stage=new Stage();
+	    			stage.setTitle("Leaders");
+	    			stage.setScene(new Scene(root1));
+	    			stage.show();
+	    		} catch (IOException e) {
+	    			// TODO Auto-generated catch block
+	    			System.out.println("can't open window");
+	    		}                             
+	        }
+	   });
+		
 	}
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 }

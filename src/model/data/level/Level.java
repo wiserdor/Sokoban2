@@ -209,6 +209,7 @@ public class Level implements Serializable {
 			this.BoardObjects.put(p, new Floor());
 			this.setCharacterPosition(p);
 		}
+		this.incStep();
 	}
 	
 	/**
