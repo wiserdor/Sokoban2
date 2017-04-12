@@ -27,6 +27,7 @@ public class Level implements Serializable {
 	private CellType[][] LevelBoard;
 	private int maxX;
 	private int maxY;
+	private int steps;
 
 	/**
 	 * Class constructor must be given parameters.
@@ -50,6 +51,7 @@ public class Level implements Serializable {
 		LevelBoard = levelBoard;
 		this.maxX = maxX;    
 		this.maxY = maxY;
+		this.steps=0;
 	}
 	/**
 	 * default constructor 
@@ -65,10 +67,16 @@ public class Level implements Serializable {
 		// ConutObjects.put(GoalBox.class.getSimpleName(), 0);
 		// ConutObjects.put(Hero.class.getSimpleName(), 0);
 		LevelBoard = null;
+		this.steps=0;
 		this.setCharacterPosition(null);
 
 	}
-
+	public int getSteps() {
+		return steps;
+	}
+	public void incStep(){
+		this.steps++;
+	}
 	public String getLevelName() {
 		return levelName;
 	}

@@ -1,12 +1,10 @@
 package model;
 
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.Observable;
 
 import model.data.CellTypes.CellType;
@@ -87,6 +85,11 @@ public class MyModel extends Observable implements Model {
 	@Override
 	public boolean isFinished() {
 		return l.isFinished();
+	}
+
+	@Override
+	public int countSteps() {
+		return l.getSteps();
 	}
 
 }

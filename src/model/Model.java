@@ -10,7 +10,5 @@ public interface Model {
 	public Character[][] getDisplay() throws IOException;
 	public void save(String path) throws IOException;
 	public boolean isFinished();
-	
-	
-
+	public int countSteps();
 }
