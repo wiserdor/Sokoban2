@@ -6,10 +6,7 @@ import java.io.OutputStream;
 
 public interface ClientHandler {
 	public void ClientIO(InputStream in, OutputStream out) throws IOException;
-
-	void start();
-
+	public void addMessageToQueue(String line);
 	void display(Character[][] board);
-	
-	
+	void display(Character[][] board,Integer steps);
 }

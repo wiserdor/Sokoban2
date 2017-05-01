@@ -19,15 +19,14 @@ public class MyModel extends Observable implements Model {
 	private Level l;
 
 	@Override
-	public void move(String Arrow) {
+	public String move(String Arrow) {
 		if (policy == null) {
 			System.out.println("please load a level");
-			return;
+			return "please load a level";
 		}
 		policy.move(Arrow);
 
-		this.setChanged();
-		this.notifyObservers(policy.isValid());
+		return policy.getMsg();
 
 	}
 

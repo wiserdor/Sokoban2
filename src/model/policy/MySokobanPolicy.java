@@ -13,6 +13,7 @@ public class MySokobanPolicy {
 	private Point p;
 	private Point pNext;
 	private String Arrow;
+	private String msg;
 	private boolean isValid;
 
 	/**
@@ -29,9 +30,12 @@ public class MySokobanPolicy {
 		p=new Point();
 		p.setLocation(l.getCharacterPosition().getX(),l.getCharacterPosition().getY());
 		this.pNext = new Point();
+		msg="";
 
 	}
-
+	public String getMsg(){
+		return this.msg;
+	}
 	public boolean isValid() {
 		return isValid;
 	}
@@ -104,6 +108,7 @@ public class MySokobanPolicy {
 
 		default:
 			System.out.println("not a valid direction");
+			msg="not a valid direction";
 			isValid = false;
 			break;
 		}
@@ -111,6 +116,7 @@ public class MySokobanPolicy {
 			if (l.getBoardObjects().get(p).tryToWalk()) { // if you can walk on								// it just walk
 				l.move(p,pNext);
 				System.out.println("Moving...");
+				msg="Moving...";
 			} else {
 				if (l.getBoardObjects().get(p).tryToMove()) { // if you can move
 																// it
@@ -119,19 +125,24 @@ public class MySokobanPolicy {
 											// is walkable
 
 						System.out.println("Pushing...");
+						msg="Pushing...";
 					} else{
 						System.out.println("Can't Move");
+						msg="Can't Move";
 						isValid = false;
 					}
 				} else {
 					System.out.println("Can't Move");
+					msg="Can't Move";
 					isValid = false;
 
 				}
 			}
 			l.refreshBoard();
-			if (l.isFinished())
+			if (l.isFinished()){
 				System.out.println("=============Congratulations!!! You Win!==============");
+				msg="=============Congratulations!!! You Win!==============";
+			}
 		}
 		
 	}

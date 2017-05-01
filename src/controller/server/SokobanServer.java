@@ -10,9 +10,9 @@ public class SokobanServer extends Observable {
 	private int port;
 	private volatile boolean isConnected;
 	private volatile boolean stop;
-	private CLI cli;
+	private ClientHandler cli;
 
-	public SokobanServer(int port, CLI cli) {
+	public SokobanServer(int port, ClientHandler cli) {
 		super();
 		this.port = port;
 		this.isConnected = false;
@@ -65,12 +65,6 @@ public class SokobanServer extends Observable {
 			}
 		}).start();
 	}
-	public void stop(){
-		this.stop=true;
-		cli.close();
-	}
-	public void sendToClient(String line){
-		cli.addMessageToQueue(line);
-	}
+
 
 }

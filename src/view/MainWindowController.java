@@ -8,6 +8,7 @@ import java.util.Observable;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -70,7 +71,12 @@ public class MainWindowController extends Observable implements View {
 				}
 			}
 		};
-		clock.start();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				clock.start();
+			}
+		});
 	}
 
 	public void stopTimer() {
@@ -80,7 +86,7 @@ public class MainWindowController extends Observable implements View {
 
 	public MainWindowController() {
 		win = false;
-		
+
 		sokoDisp = new SokoDisp();
 		timerOn = false;
 
@@ -90,6 +96,7 @@ public class MainWindowController extends Observable implements View {
 		String command = "Display";
 		String[] s = new String[1];
 		stepsLbl.setText("0");
+		this.startTimer();
 		s[0] = command;
 		this.setChanged();
 		this.notifyObservers(s);
@@ -98,7 +105,6 @@ public class MainWindowController extends Observable implements View {
 			@Override
 			public void handle(KeyEvent event) {
 				String direction = "";
-				System.out.println("inside");
 				if (event.getCode() == KeyCode.LEFT) {
 					direction = "left";
 				} else if (event.getCode() == KeyCode.RIGHT) {
@@ -114,13 +120,13 @@ public class MainWindowController extends Observable implements View {
 				s[1] = direction;
 				setChanged();
 				notifyObservers(s);
-				
+
 			}
 		});
-		
+
 		this.setChanged();
 		this.notifyObservers(s);
-		
+
 	}
 
 	public void stop() {
@@ -184,16 +190,17 @@ public class MainWindowController extends Observable implements View {
 	public void display(Character[][] board) {
 		sokoDisp.setMaze(board);
 	}
+
 	@Override
 	public void display(Character[][] board, int steps) {
 		this.steps = steps;
 		sokoDisp.setMaze(board);
 		Platform.runLater(new Runnable() {
-	        @Override
-	        public void run() {
-	        	stepsLbl.setText(Integer.toString(steps));                          
-	        }
-	   });
+			@Override
+			public void run() {
+				stepsLbl.setText(Integer.toString(steps));
+			}
+		});
 	}
 
 	@Override

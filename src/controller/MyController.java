@@ -14,6 +14,7 @@ import controller.commands.LoadCommand;
 import controller.commands.MoveCommand;
 import controller.commands.SaveCommand;
 import controller.server.CLI;
+import controller.server.ClientHandler;
 import controller.server.SokobanServer;
 import model.Model;
 import view.View;
@@ -22,13 +23,22 @@ public class MyController implements Controller {
 	private Model model;
 	private View view;
 	private SokobanServer server;
+	private ClientHandler cli;
 	private BlockingQueue<Commands> queue;
 	private boolean isStopped = false;
 
-	public MyController(Model model, View view,int port) {
+	public MyController(Model model, View view) {
 		this.model = model;
 		this.view = view;
-		this.server=new SokobanServer(port, new CLI(null, null, null));
+		queue = new ArrayBlockingQueue<Commands>(10);
+		start();
+	}
+
+	public MyController(Model model, View view, int port) {
+		this.model = model;
+		this.view = view;
+		this.cli = new CLI();
+		this.server = new SokobanServer(port, cli);
 		queue = new ArrayBlockingQueue<Commands>(10);
 
 		start();
@@ -44,11 +54,11 @@ public class MyController implements Controller {
 			break;
 		case "display":
 		case "Display":
-			cmd = new DisplayCommand(model, view);
+			cmd = new DisplayCommand(model, view, cli);
 			break;
 		case "Move":
 		case "move":
-			cmd = new MoveCommand(model);
+			cmd = new MoveCommand(model,view, cli);
 			cmd.setParams(cmdSplit[1]);
 			break;
 		case "save":
@@ -58,7 +68,7 @@ public class MyController implements Controller {
 			break;
 		case "exit":
 		case "Exit":
-			cmd = new ExitCommand(this,view);
+			cmd = new ExitCommand(this, view);
 
 			break;
 		default:
@@ -100,28 +110,8 @@ public class MyController implements Controller {
 	}
 
 	public void update(Observable o, Object arg) {
-		if (o.equals(view)) {
-			String[] params = (String[]) arg;
-			insertCommand(params);
-		} else if (o.equals(model)) {
-			if(model.isFinished()){
-				try {
-					view.setWin();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if ((boolean) arg) {
-				try {
-					view.display(model.getDisplay(),model.countSteps());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-
+		String[] params = (String[]) arg;
+		insertCommand(params);
 	}
 
 }

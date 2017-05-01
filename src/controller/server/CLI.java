@@ -10,107 +10,137 @@ import java.io.PrintWriter;
 import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.hibernate.engine.spi.SessionDelegatorBaseImpl;
+
 public class CLI extends Observable implements ClientHandler {
 	private ArrayBlockingQueue<String> queue;
-	private BufferedReader reader;
-	private PrintWriter writer;
 	private volatile boolean isConnected;
 	private String exitString;
 
-	public CLI(BufferedReader reader, PrintWriter writer, String exitString) {
-		super();
-		queue=new ArrayBlockingQueue<String>(200);
-		this.reader = reader;
-		this.writer = writer;
-		this.exitString = exitString;
-		this.isConnected=true;
-	}
-
-	@Override
-	public void start() {
-		Thread thread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				String cmdChoice="";
-				while (true) {
-					writer.println("Please enter a choice");
-					writer.flush();
-					do{
-					try {
-						cmdChoice = reader.readLine();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					String[] cmdSplit = cmdChoice.split(" ", 2);
-					setChanged();
-					notifyObservers(cmdSplit);
-
-					if (cmdChoice.equals("exit"))
-						break;
-					} while (!cmdChoice.equals(exitString));
-				}
-			}
-		});
-		thread.start();
+	public CLI() {
+		queue = new ArrayBlockingQueue<String>(200);
+		this.queue.clear();
+		this.isConnected = true;
 	}
 
 	
-
-
 	@Override
 	public void display(Character[][] board) {
 		for(int i=0;i<board.length;i++){
-		for(int j=0;j<board[i].length;j++)
-			writer.print(board[i][j]);
-		writer.println();
+			this.addMessageToQueue(board[i].toString());
+		}
+		
 	}
-	writer.flush();
+	@Override
+	public void display(Character[][] board,Integer steps) {
+		for(int i=0;i<board.length;i++){
+			this.addMessageToQueue(board[i].toString());
+		}
+		this.addMessageToQueue(steps.toString());
 		
 	}
 
-	public void close() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+
 	public void addMessageToQueue(String line) {
 		this.queue.add(line);
 	}
 
 	@Override
 	public void ClientIO(InputStream in, OutputStream out) throws IOException {
-		this.writer=new PrintWriter(new OutputStreamWriter(out));
-		this.reader=new BufferedReader(new InputStreamReader(in));
-		Thread t=aSyncSendToClient(writer);
-		reader.close();
 
-		
+		try {
+			this.queue = new ArrayBlockingQueue<String>(20);
+			this.queue.clear();
+			this.isConnected = true;
+			// Adapter from InputStream to BufferReader
+			BufferedReader clientInput = new BufferedReader(new InputStreamReader(in));
+			PrintWriter serverOutput = new PrintWriter(out);
+
+			// open a new thread who reading from the client
+			Thread fromClient = aSyncReadInputs(clientInput, "exit");
+			Thread toClient = aSyncSendToClient(serverOutput);
+
+			fromClient.join();
+			toClient.join();
+			clientInput.close();
+			serverOutput.close();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
+
+	private Thread aSyncReadInputs(BufferedReader in, String exitStr) {
+		Thread t = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				readInputs(in, exitStr);
+			}
+		});
+		t.start();
+		return t;
+	}
+
+	private void readInputs(BufferedReader in, String exitStr) {
+
+		String line;
+		boolean flag = false;
+
+		try {
+			while (!flag) {
+
+				line = in.readLine();
+
+				if (line.equals(exitStr)) {
+					flag = true;
+					this.addMessageToQueue("Thank You For Playing!");
+					stop();
+				} else {
+					setChanged();
+					notifyObservers(line);
+				}
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private Thread aSyncSendToClient(PrintWriter writeToClient) {
-		Thread t=new Thread(new Runnable() {
-			
+		Thread t = new Thread(new Runnable() {
+
 			@Override
 			public void run() {
 				sendToClient(writeToClient);
 			}
 		});
-		t.start();	
+		t.start();
 		return t;
 	}
-	private void sendToClient(PrintWriter writeToClient){
-		while(isConnected){
+
+	public void sendMsgToClient(ArrayBlockingQueue<String> queue) {
+		this.queue = queue;
+	}
+
+	private void sendToClient(PrintWriter writeToClient) {
+		while (isConnected) {
 			try {
-				String line=queue.take();
-				if(line !=null){
+				String line = queue.take();
+				if (line != null) {
 					writeToClient.println(line);
 					writeToClient.flush();
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
+	}
+	private void stop(){
+		this.isConnected=false;
 	}
 }
