@@ -22,7 +22,6 @@ public class User {
 	@OneToMany
 	@JoinColumn(name="UserName")
 	private List<Level> levels = new ArrayList<Level>();
-
 	public String getUserName() {
 		return userName;
 	}
@@ -36,6 +35,12 @@ public class User {
 	}
 
 	public void setLevels(List<Level> levels) {
+		this.levels = levels;
+	}
+
+	public User(String userName, List<Level> levels) {
+		super();
+		this.userName = userName;
 		this.levels = levels;
 	}
 }

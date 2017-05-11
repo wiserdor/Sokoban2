@@ -5,6 +5,10 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import model.data.CellTypes.Box;
 import model.data.CellTypes.CellType;
 import model.data.CellTypes.Floor;
