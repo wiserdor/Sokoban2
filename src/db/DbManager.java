@@ -9,16 +9,46 @@ import org.hibernate.Session;
 
 public class DbManager {
 
-	private static int addScore(String userName, String levelName, Timer time, int steps) {
+	private static void addScore(String userName, String levelName, Timer time, int steps) {
 		lev = new Level(levelName, userName);
 		usr = new User(userName,levelName);
 		levuse = new LevelUser(userName, levelName, time, steps);
 		Transaction tx = null;
-		int empID = 0;
+		int scoreID = 0;
+		
+		
 		Session session = factory.openSession();
 		try {
 			tx = session.beginTransaction();
-			empID = (Integer) session.save(emp);
+			scoreID = (Integer) session.save(emp);
+			scoreID = (Integer) session.save(emp);
+			scoreID = (Integer) session.save(emp);
+
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return empID;
+	}
+	private static int addUser(String userName, String levelName, Timer time, int steps) {
+		lev = new Level(levelName, userName);
+		usr = new User(userName,levelName);
+		levuse = new LevelUser(userName, levelName, time, steps);
+		Transaction tx = null;
+		int scoreID = 0;
+		
+		
+		Session session = factory.openSession();
+		try {
+			tx = session.beginTransaction();
+			scoreID = (Integer) session.save(emp);
+			scoreID = (Integer) session.save(emp);
+			scoreID = (Integer) session.save(emp);
+
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
