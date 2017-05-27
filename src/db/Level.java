@@ -16,7 +16,7 @@ import model.data.level.Level;
 @Entity(name="Levels")
 public class Level {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column 
 	private String levelname;
 	
 	

@@ -1,24 +1,24 @@
 package db;
 
-import java.sql.Time;
 import java.util.Timer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
 @Entity(name="LevelUsers")
 public class LevelUsers {
 	@Id
-	@JoinColumn(name="LevelName")
+	@Column(name="LevelName")
 	private String levelname;
 	
-	@JoinColumn(name="UserName")
+	@Column(name="UserName")
 	private String UserName;
-	@JoinColumn(name="Time")
+	@Column(name="Time")
 	private Timer time;
-	@JoinColumn(name="Steps")
+	@Column(name="Steps")
 	private int Steps;
 	public Timer getTime() {
 		return time;
