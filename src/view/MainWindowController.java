@@ -40,44 +40,7 @@ public class MainWindowController extends Observable implements View {
 	private MediaPlayer player = new MediaPlayer(startMp3);
 	private MediaPlayer finished = new MediaPlayer(winMp3);
 
-	public void startTimer() {
-		timerOn = true;
-		clock = new AnimationTimer() {
-			private long timestamp;
-			private long time = 0;
-			private long fraction = 0;
-
-			@Override
-			public void start() {
-				// current time adjusted by remaining time from last run
-				timestamp = System.currentTimeMillis() - fraction;
-
-			}
-
-			@Override
-			public void stop() {
-				// save leftover time not handled with the last update
-				fraction = System.currentTimeMillis() - timestamp;
-			}
-
-			@Override
-			public void handle(long now) {
-				long newTime = System.currentTimeMillis();
-				if (timestamp + 1000 <= newTime) {
-					long deltaT = (newTime - timestamp) / 1000;
-					time += deltaT;
-					timestamp += 1000 * deltaT;
-					timerLbl.setText(Long.toString(time));
-				}
-			}
-		};
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				clock.start();
-			}
-		});
-	}
+	
 
 	public void stopTimer() {
 		timerOn = false;
@@ -96,7 +59,6 @@ public class MainWindowController extends Observable implements View {
 		String command = "Display";
 		String[] s = new String[1];
 		stepsLbl.setText("0");
-		this.startTimer();
 		s[0] = command;
 		this.setChanged();
 		this.notifyObservers(s);
