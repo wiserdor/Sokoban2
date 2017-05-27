@@ -13,6 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -120,8 +123,6 @@ public class SokoDisp extends Canvas implements Initializable {
 			} else {
 				gc.clearRect(0, 0, W, H);
 				gc.drawImage(win, 150, 0, 360, 640);
-				
-				
 			}
 		}
 		this.setFocused(true);
@@ -131,7 +132,13 @@ public class SokoDisp extends Canvas implements Initializable {
 	public void drawWin() {
 		isWin = true;
 		redraw();
-		getLeaderBoard();
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like to submit your score?", ButtonType.YES, ButtonType.NO);
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.YES) {
+			getLeaderBoard();
+		}
+		
 	}
 	public void getLeaderBoard() {
 		Platform.runLater(new Runnable() {
