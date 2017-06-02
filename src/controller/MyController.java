@@ -93,7 +93,7 @@ public class MyController implements Controller {
 					try {
 						Commands cmd = queue.poll(1, TimeUnit.SECONDS);
 						if (cmd != null)
-							cmd.execute();
+								cmd.execute();
 					} catch (InterruptedException | ClassNotFoundException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
