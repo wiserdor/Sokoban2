@@ -1,8 +1,7 @@
 package db;
 
-import java.util.Timer;
+import java.sql.Time;
 import java.util.List;
-
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,8 +12,10 @@ import org.hibernate.query.Query;
 
 public class DbManager {
 	private static SessionFactory factory;
-
-	private static int addLevelUsers(String userName, String levelName, Timer time, int steps) {
+	public DbManager(SessionFactory factory) {
+		this.factory=factory;
+	}
+	public static int addLevelUsers(String userName, String levelName, Time time, int steps) {
 		Level lev = new Level(levelName);
 		User usr = new User(userName);
 		LevelUsers levuse = new LevelUsers(lev, usr, time, steps);
@@ -40,28 +41,7 @@ public class DbManager {
 	}
 
 
-
-	/*private static void printEmployees() {
-			Session session = factory.openSession();
-			try {
-			Query<Employee> query = session.createQuery("from
-			Employees");
-			List<Employee> list = query.list();
-			for (Employee e: list) {
-			System.out.println(e);
-			}
-			}
-			catch (HibernateException e) {
-			e.printStackTrace();
-			}
-			finally {
-			session.close();
-			}
-			}//
-	// Method to print all employees whose names start with specified
-	prefix*/
-
-	private static void printAllUsersByTime(String l) {
+	public static void printAllUsersByTime(String l) {
 			Session session = factory.openSession();
 			Query query = session.createQuery("from LevelUsers lu where lu.levelName=:level order by time,steps");
 			query.setParameter("level", l);
@@ -75,9 +55,9 @@ public class DbManager {
 			session.close();
 			}
 	
-	private static void printAllUsersBySteps(String l) {
+	public static void printAllUsersBySteps(String l) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.levelName=:level order by steps,time");
+		Query query = session.createQuery("from LevelUsers lu where lu.LevelName=:level order by lu.Steps,lu.Time");
 		query.setParameter("level", l);
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
@@ -90,13 +70,13 @@ public class DbManager {
 		session.close();
 		}
 	
-	private static void printAllLevelsBySteps(String u) {
+	public static void printAllLevelsBySteps(String u) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.userName=:user order by steps,time,level");
-		query.setParameter("user", u);
+		Query query = session.createQuery("from LevelUsers lu where lu.userName=:User order by steps,time,level");
+		query.setParameter("User", u);
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
-		System.out.println(lu.getLevelname());
+		System.out.println(lu.getLevelName());
 		System.out.println(lu.getSteps());
 		System.out.println(lu.getTime());
 
@@ -105,13 +85,13 @@ public class DbManager {
 		session.close();
 		}
 	
-	private static void printAllLevelsByTime(String u) {
+	public static void printAllLevelsByTime(String u) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.userName=:user order by time,steps,level");
-		query.setParameter("user", u);
+		Query query = session.createQuery("from LevelUsers lu where lu.userName=User order by time,steps,level");
+		query.setParameter("User", u);
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
-			System.out.println(lu.getLevelname());
+			System.out.println(lu.getLevelName());
 		System.out.println(lu.getSteps());
 		System.out.println(lu.getTime());
 
@@ -121,13 +101,13 @@ public class DbManager {
 		}
 
 
-	private static void printAllLevelsByLevel(String u) {
+	public static void printAllLevelsByLevel(String u) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.userName=:user order by level,time,steps");
-		query.setParameter("user", u);
+		Query query = session.createQuery("from LevelUsers lu where lu.userName=:User order by level,time,steps");
+		query.setParameter("User", u);
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
-			System.out.println(lu.getLevelname());
+			System.out.println(lu.getLevelName());
 		System.out.println(lu.getSteps());
 		System.out.println(lu.getTime());
 

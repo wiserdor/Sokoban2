@@ -8,15 +8,19 @@ import javax.persistence.Id;
 public class User  {
 	@Id
 	@Column(name="UserName")
-	private String userName;
+	private String UserName;
 	
 	
 	public String getUserName() {
-		return userName;
+		return UserName;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.UserName = userName;
+	}
+
+	public User() {
+	
 	}
 
 	public User (String name) 

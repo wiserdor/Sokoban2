@@ -8,26 +8,30 @@ import javax.persistence.Id;
 public class Level {
 	@Id
 	@Column(name="LevelName") 
-	private String levelname;
+	private String LevelName;
 	
 	
 
 
-	public String getLevelname() {
-		return levelname;
+	public Level() {
+	
 	}
 
-	public void setLevelname(String levelname) {
-		this.levelname = levelname;
+	public String getLevelName() {
+		return LevelName;
+	}
+
+	public void setLevelName(String LevelName) {
+		this.LevelName = LevelName;
 	}
 
 	public Level (String name)
 	{
-		setLevelname(name);
+		setLevelName(name);
 	}
 		
 	@Override
 	public String toString(){
-		return "Level name [levelname]";
+		return "Level name [LevelName]";
 	}
 }

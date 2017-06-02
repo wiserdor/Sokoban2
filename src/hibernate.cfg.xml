@@ -14,8 +14,8 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 		<mapping class="db.Level"></mapping>
-				<mapping class="db.User"></mapping>
-				<mapping class="db.LevelUsers"></mapping>
+		<mapping class="db.User"></mapping>
+		<mapping class="db.LevelUsers"></mapping>
 		
 	</session-factory>
 </hibernate-configuration>

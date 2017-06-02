@@ -1,15 +1,11 @@
 package db;
 
-import java.util.logging.Logger;
-import java.util.List;
+import java.sql.Time;
 import java.util.logging.Level;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import java.util.logging.Logger;
+
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
-import db.LevelUsers;
 public class test {
 	private static SessionFactory factory;
 
@@ -19,8 +15,10 @@ public class test {
 		configuration.configure();
 		factory = configuration.buildSessionFactory();
 
-		 DbManager db= new DbManager();
-		  
+		 DbManager db= new DbManager(factory);
+		 
+		  int dd=DbManager.addLevelUsers("carmi", "levelName", new Time((long) 3.0), 4);
+		 // DbManager.printAllUsersBySteps("levelName");
 	}
 
 }

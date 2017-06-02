@@ -1,29 +1,46 @@
 package db;
 
-import java.util.Timer;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity(name="LevelUsers")
 public class LevelUsers  {
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int levelUserId;
-	
-	@Column(name="LevelName")
-	private Level levelname;
-	
-	@Column(name="UserName")
-	private User UserName;
-	
-	public Level getLevelname() {
-		return levelname;
+	public int getLevelUserId() {
+		return levelUserId;
 	}
 
-	public void setLevelname(Level levelname) {
-		this.levelname = levelname;
+	public void setLevelUserId(int levelUserId) {
+		this.levelUserId = levelUserId;
+	}
+
+	@OneToOne
+	@JoinColumn(name="LevelName")
+	private Level LevelName;
+	@OneToOne
+	@JoinColumn(name="UserName")
+	private User UserName;
+	
+	@Column(name="Time")
+	private Time Time;
+	
+	@Column(name="Steps")
+	private int Steps;
+	public Level getLevelName() {
+		return LevelName;
+	}
+
+	public void setLevelName(Level LevelName) {
+		this.LevelName = LevelName;
 	}
 
 	public User getUserName() {
@@ -34,27 +51,27 @@ public class LevelUsers  {
 		UserName = userName;
 	}
 
-	@Column(name="Time")
-	private Timer time;
-	@Column(name="Steps")
-	private int Steps;
+	
 	
 	
 
-	public LevelUsers( Level levelname, User userName, Timer time, int steps) {
-		super();
-		this.levelname = levelname;
+	public LevelUsers( Level LevelName, User userName, Time Time, int steps) {
+		this.LevelName = LevelName;
 		UserName = userName;
-		this.time = time;
+		this.Time = Time;
 		Steps = steps;
 	}
 
-	public Timer getTime() {
-		return time;
+	public Time getTime() {
+		return Time;
 	}
 
-	public void setTime(Timer time) {
-		this.time = time;
+	public void setTime(Time Time) {
+		this.Time = Time;
+	}
+
+	public LevelUsers() {
+		
 	}
 
 	public int getSteps() {
