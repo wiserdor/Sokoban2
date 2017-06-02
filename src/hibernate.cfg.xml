@@ -4,7 +4,7 @@
 		<property name="connection.driver_class">
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
 		</property>
-		<property name="connection.url">jdbc:sqlserver://localhost:1433;database=EmployeesDb;integratedSecurity=true;
+		<property name="connection.url">jdbc:sqlserver://localhost:1433;database=sokoban;integratedSecurity=true;
 		</property>
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>
@@ -13,6 +13,9 @@
 		</property>
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
-		<mapping class="db.Employee"></mapping>
+		<mapping class="db.Level"></mapping>
+				<mapping class="db.User"></mapping>
+				<mapping class="db.LevelUsers"></mapping>
+		
 	</session-factory>
 </hibernate-configuration>

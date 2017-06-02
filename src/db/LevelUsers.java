@@ -6,20 +6,49 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity(name="LevelUsers")
-public class LevelUsers {
-	@Id
+public class LevelUsers  {
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int levelUserId;
+	
 	@Column(name="LevelName")
-	private String levelname;
+	private Level levelname;
 	
 	@Column(name="UserName")
-	private String UserName;
+	private User UserName;
+	
+	public Level getLevelname() {
+		return levelname;
+	}
+
+	public void setLevelname(Level levelname) {
+		this.levelname = levelname;
+	}
+
+	public User getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(User userName) {
+		UserName = userName;
+	}
+
 	@Column(name="Time")
 	private Timer time;
 	@Column(name="Steps")
 	private int Steps;
+	
+	
+
+	public LevelUsers( Level levelname, User userName, Timer time, int steps) {
+		super();
+		this.levelname = levelname;
+		UserName = userName;
+		this.time = time;
+		Steps = steps;
+	}
+
 	public Timer getTime() {
 		return time;
 	}
@@ -36,29 +65,6 @@ public class LevelUsers {
 		Steps = steps;
 	}
 
-	public String getLevelname() {
-		return levelname;
-	}
-
-	public void setLevelname(String levelname) {
-		this.levelname = levelname;
-	}
-
-	public String getUserName() {
-		return UserName;
-	}
-
-	public void setUserName(String userName) {
-		UserName = userName;
-	}
-
-	public LevelUsers(String levelname, String userName, Timer time, int steps) {
-		super();
-		this.levelname = levelname;
-		UserName = userName;
-		this.time = time;
-		Steps = steps;
-	}
 
 	
 }
