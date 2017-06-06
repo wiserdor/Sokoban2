@@ -65,14 +65,10 @@ public class DbManager
 
 
 	public static void printAllUsersByTime(String l) {
-		
-//		User user = getSomeUser();
-//		Query query = session.createQuery("from UserOwnsAvatar where user.username =  :username");
-//		query.setParameter("username", user);
-		
+				
 			Session session = factory.openSession();
-			Query query = session.createQuery("FROM LevelUsers lu WHERE lu.levelName LIKE = :value order by time,steps");
-			query.setParameter("value", l);
+			Query query = session.createQuery("FROM LevelUsers lu WHERE lu.levelName LIKE :value order by lu.time,lu.steps");
+			query.setParameter("value", l+"%");
 			List<LevelUsers> list = query.list();
 			for (LevelUsers lu: list) {
 			System.out.println(lu.getUserName());
@@ -83,18 +79,16 @@ public class DbManager
 			session.close();
 			}
 	
-	public static void printAllUsersBySteps(String prefix) {
-		System.out.println(prefix);
+	public static void printAllUsersBySteps(String l) {
+		System.out.println(l);
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.LevelName LIKE:prefix"); // lu where lu.LevelName LIKE :level order by lu.Steps,lu.Time"
-		query.setParameter("prefix", prefix+"%");
-
-				
+		Query query = session.createQuery("from LevelUsers lu where lu.LevelName LIKE :value order by lu.Steps,lu.Time");
+		query.setParameter("value", l+"%");		
 		List<LevelUsers> list = query.list();
-		for (LevelUsers user: list) {	
-		System.out.println(user.getUserName());
-		System.out.println(user.getSteps());
-		System.out.println(user.getTime());
+		for (LevelUsers lu: list) {	
+		System.out.println(lu.getUserName());
+		System.out.println(lu.getSteps());
+		System.out.println(lu.getTime());
 
 
 		}
@@ -103,8 +97,8 @@ public class DbManager
 	
 	public static void printAllLevelsBySteps(String u) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.userName=:User order by steps,time,level");
-		query.setParameter("User", u);
+		Query query = session.createQuery("from LevelUsers lu where lu.userName like :value order by lu.steps,lu.time,lu.LevelName");
+		query.setParameter("value", u+"%");
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
 		System.out.println(lu.getLevelName());
@@ -118,8 +112,8 @@ public class DbManager
 	
 	public static void printAllLevelsByTime(String u) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.userName=User order by time,steps,level");
-		query.setParameter("User", u);
+		Query query = session.createQuery("from LevelUsers lu where lu.userName like :value order by lu.time,lu.steps,lu.LevelName");
+		query.setParameter("value", u+"%");
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
 			System.out.println(lu.getLevelName());
@@ -134,11 +128,11 @@ public class DbManager
 
 	public static void printAllLevelsByLevel(String u) {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.userName=:User order by level,time,steps");
-		query.setParameter("User", u);
+		Query query = session.createQuery("from LevelUsers lu where lu.userName like :value order by lu.LevelName,lu.time,lu.steps");
+		query.setParameter("value", u+"%");
 		List<LevelUsers> list = query.list();
 		for (LevelUsers lu: list) {
-			System.out.println(lu.getLevelName());
+		System.out.println(lu.getLevelName());
 		System.out.println(lu.getSteps());
 		System.out.println(lu.getTime());
 

@@ -17,8 +17,8 @@ public class test {
 		factory = configuration.buildSessionFactory();
 		
 		 DbManager db= new DbManager(factory);
-	  //DbManager.addLevelUsers("levelName", "carmi", new Time((long) 3.0), 4);
-		 DbManager.printAllUsersBySteps("levelName");
+	     //DbManager.addLevelUsers("levelName", "carmi", new Time((long) 3.0), 4);
+		DbManager.printAllUsersBySteps("carmi");
 	}
 
 }
