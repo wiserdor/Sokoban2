@@ -14,40 +14,37 @@ import javax.persistence.OneToOne;
 public class LevelUsers  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="levelUserId")
 	private int levelUserId;
-	public int getLevelUserId() {
-		return levelUserId;
-	}
 
-	public void setLevelUserId(int levelUserId) {
-		this.levelUserId = levelUserId;
-	}
 
-	@OneToOne
+	
 	@JoinColumn(name="LevelName")
-	private Level LevelName;
-	@OneToOne
+	private String LevelName;
+	
+	
 	@JoinColumn(name="UserName")
-	private User UserName;
+	private String UserName;
 	
 	@Column(name="Time")
 	private Time Time;
 	
 	@Column(name="Steps")
 	private int Steps;
-	public Level getLevelName() {
+	
+	public String getLevelName() {
 		return LevelName;
 	}
 
-	public void setLevelName(Level LevelName) {
+	public void setLevelName(String LevelName) {
 		this.LevelName = LevelName;
 	}
 
-	public User getUserName() {
+	public String getUserName() {
 		return UserName;
 	}
 
-	public void setUserName(User userName) {
+	public void setUserName(String userName) {
 		UserName = userName;
 	}
 
@@ -55,7 +52,7 @@ public class LevelUsers  {
 	
 	
 
-	public LevelUsers( Level LevelName, User userName, Time Time, int steps) {
+	public LevelUsers( String LevelName, String userName, Time Time, int steps) {
 		this.LevelName = LevelName;
 		UserName = userName;
 		this.Time = Time;

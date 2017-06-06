@@ -10,23 +10,47 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 
-public class DbManager {
+public class DbManager 
+{
 	private static SessionFactory factory;
-	public DbManager(SessionFactory factory) {
+	
+	public DbManager(SessionFactory factory)
+	{
 		this.factory=factory;
 	}
-	public static int addLevelUsers(String userName, String levelName, Time time, int steps) {
-		Level lev = new Level(levelName);
+	public static void addOnlyUser(String userName)
+	{
 		User usr = new User(userName);
-		LevelUsers levuse = new LevelUsers(lev, usr, time, steps);
 		Transaction tx = null;
-		int levelUserId = 0;
-
-		
 		Session session = factory.openSession();
 		try {
 			tx = session.beginTransaction();
-			levelUserId = (Integer)session.save(levuse);
+			tx.commit();
+			
+		} catch (HibernateException e) 
+		{
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally 
+		{
+			session.close();
+		}
+	}
+	public static void addLevelUsers(String userName, String levelName, Time time, int steps) {
+		Level lev = new Level(levelName);
+		User usr = new User(userName);
+		LevelUsers levuse = new LevelUsers(levelName, userName, time, steps);
+		Transaction tx = null;
+		int levelUserId=0;
+		Session session = factory.openSession();
+		
+
+		try {
+			tx = session.beginTransaction();
+			session.save(lev);
+			session.save(usr);
+			session.save(levuse);
 			tx.commit();
 			
 		} catch (HibernateException e) {
@@ -37,14 +61,18 @@ public class DbManager {
 			session.close();
 		}
 	
-        return levelUserId;
 	}
 
 
 	public static void printAllUsersByTime(String l) {
+		
+//		User user = getSomeUser();
+//		Query query = session.createQuery("from UserOwnsAvatar where user.username =  :username");
+//		query.setParameter("username", user);
+		
 			Session session = factory.openSession();
-			Query query = session.createQuery("from LevelUsers lu where lu.levelName=:level order by time,steps");
-			query.setParameter("level", l);
+			Query query = session.createQuery("FROM LevelUsers lu WHERE lu.levelName LIKE = :value order by time,steps");
+			query.setParameter("value", l);
 			List<LevelUsers> list = query.list();
 			for (LevelUsers lu: list) {
 			System.out.println(lu.getUserName());
@@ -55,15 +83,18 @@ public class DbManager {
 			session.close();
 			}
 	
-	public static void printAllUsersBySteps(String l) {
+	public static void printAllUsersBySteps(String prefix) {
+		System.out.println(prefix);
 		Session session = factory.openSession();
-		Query query = session.createQuery("from LevelUsers lu where lu.LevelName=:level order by lu.Steps,lu.Time");
-		query.setParameter("level", l);
+		Query query = session.createQuery("from LevelUsers lu where lu.LevelName LIKE:prefix"); // lu where lu.LevelName LIKE :level order by lu.Steps,lu.Time"
+		query.setParameter("prefix", prefix+"%");
+
+				
 		List<LevelUsers> list = query.list();
-		for (LevelUsers lu: list) {
-		System.out.println(lu.getUserName());
-		System.out.println(lu.getSteps());
-		System.out.println(lu.getTime());
+		for (LevelUsers user: list) {	
+		System.out.println(user.getUserName());
+		System.out.println(user.getSteps());
+		System.out.println(user.getTime());
 
 
 		}

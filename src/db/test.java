@@ -9,16 +9,16 @@ import org.hibernate.cfg.Configuration;
 public class test {
 	private static SessionFactory factory;
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		Configuration configuration = new Configuration();
 		configuration.configure();
 		factory = configuration.buildSessionFactory();
-
+		
 		 DbManager db= new DbManager(factory);
-		 
-		  int dd=DbManager.addLevelUsers("carmi", "levelName", new Time((long) 3.0), 4);
-		 // DbManager.printAllUsersBySteps("levelName");
+	  //DbManager.addLevelUsers("levelName", "carmi", new Time((long) 3.0), 4);
+		 DbManager.printAllUsersBySteps("levelName");
 	}
 
 }

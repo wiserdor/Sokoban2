@@ -1,27 +1,27 @@
 package db;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name="Levels")
-public class Level {
+public class Level 
+{
 	@Id
 	@Column(name="LevelName") 
-	private String LevelName;
+	 String LevelName;
 	
-	
-
-
-	public Level() {
-	
+	public Level()
+	{
+		
 	}
 
-	public String getLevelName() {
+	public String getLevelName()
+	{
 		return LevelName;
 	}
 
-	public void setLevelName(String LevelName) {
+	public void setLevelName(String LevelName)
+	{
 		this.LevelName = LevelName;
 	}
 
@@ -31,7 +31,8 @@ public class Level {
 	}
 		
 	@Override
-	public String toString(){
+	public String toString()
+	{
 		return "Level name [LevelName]";
 	}
 }
