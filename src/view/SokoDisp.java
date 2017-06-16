@@ -132,11 +132,10 @@ public class SokoDisp extends Canvas implements Initializable {
 	public void drawWin() {
 		isWin = true;
 		redraw();
-		
 		Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like to submit your score?", ButtonType.YES, ButtonType.NO);
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES) {
-			getLeaderBoard();
+			//getLeaderBoard();
 		}
 		
 	}
