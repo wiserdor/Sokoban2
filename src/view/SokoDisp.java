@@ -135,7 +135,7 @@ public class SokoDisp extends Canvas implements Initializable {
 		Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like to submit your score?", ButtonType.YES, ButtonType.NO);
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES) {
-			//getLeaderBoard();
+			getLeaderBoard();
 		}
 		
 	}
