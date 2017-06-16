@@ -6,13 +6,13 @@ import java.util.ResourceBundle;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import db.DbManager;
 import db.LevelUsers;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,13 +21,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class LeaderBoardController implements Initializable {
 	private ObservableList<LevelUsers> data;
 	ObservableList<String> options = FXCollections.observableArrayList("Name", "Level");
-
+	SessionFactory factory = new Configuration().configure().buildSessionFactory();
+	DbManager db=new DbManager(factory);
 
 	@FXML
 	private Button bt1;
@@ -58,7 +58,7 @@ public class LeaderBoardController implements Initializable {
 					}
 				});
 				data = FXCollections.observableArrayList();
-				//SessionFactory factory = new Configuration().configure().buildSessionFactory();
+				
 				levelUsersTable.setEditable(true);
 
 				// LevelUsers table columns Initialization
@@ -103,7 +103,7 @@ public class LeaderBoardController implements Initializable {
 				levelUsersTable.getColumns().addAll(column1, column2, column3, column4);
 
 				// Data set up
-				//levelUsersTable.setItems(data);
+				levelUsersTable.setItems(data);
 
 				// Mouse click event handler
 				// levelUsersTable.setOnMouseClicked(new
@@ -135,7 +135,11 @@ public class LeaderBoardController implements Initializable {
 	}
 
 	protected void OrderBy(String t1) {
-		// TODO Auto-generated method stub
+		if(t1=="Name"){
+			
+		} else if(t1=="Level"){
+			
+		}
 
 	}
 }

@@ -27,7 +27,7 @@ public class LevelUsers  {
 	private String UserName;
 	
 	@Column(name="Time")
-	private Time Time;
+	private Double Time;
 	
 	@Column(name="Steps")
 	private int Steps;
@@ -52,18 +52,18 @@ public class LevelUsers  {
 	
 	
 
-	public LevelUsers( String LevelName, String userName, Time Time, int steps) {
+	public LevelUsers( String LevelName, String userName, Double Time, int steps) {
 		this.LevelName = LevelName;
 		UserName = userName;
 		this.Time = Time;
 		Steps = steps;
 	}
 
-	public Time getTime() {
+	public Double getTime() {
 		return Time;
 	}
 
-	public void setTime(Time Time) {
+	public void setTime(Double Time) {
 		this.Time = Time;
 	}
 

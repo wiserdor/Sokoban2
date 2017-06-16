@@ -1,6 +1,5 @@
 package db;
 
-import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +16,7 @@ public class test {
 		factory = configuration.buildSessionFactory();
 		
 		 DbManager db= new DbManager(factory);
-	     //DbManager.addLevelUsers("levelName", "carmi", new Time((long) 3.0), 4);
+	     //DbManager.addLevelUsers("levelName", "carmi", 0.2, 4);
 		DbManager.printAllUsersBySteps("carmi");
 	}
 

@@ -37,7 +37,7 @@ public class DbManager
 			session.close();
 		}
 	}
-	public static void addLevelUsers(String userName, String levelName, Time time, int steps) {
+	public static void addLevelUsers(String userName, String levelName, Double time, int steps) {
 		Level lev = new Level(levelName);
 		User usr = new User(userName);
 		LevelUsers levuse = new LevelUsers(levelName, userName, time, steps);
