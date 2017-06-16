@@ -11,4 +11,5 @@ public interface Model {
 	public void save(String path) throws IOException;
 	public boolean isFinished();
 	public int countSteps();
+	public void setFinishTime(Double finishTime);
 }

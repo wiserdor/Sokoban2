@@ -31,6 +31,19 @@ public class Level implements Serializable {
 	private int maxX;
 	private int maxY;
 	private int steps;
+	private double finishTime;
+
+	public double getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(double finishTime) {
+		this.finishTime = finishTime;
+	}
+
+	public void setSteps(int steps) {
+		this.steps = steps;
+	}
 
 	/**
 	 * Class constructor must be given parameters.

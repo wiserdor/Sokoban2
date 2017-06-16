@@ -9,5 +9,6 @@ public interface View {
 	public void display(Character[][] board,int countSteps);
 	public void setWin() throws FileNotFoundException;
 	public void exitGui();
+	public Double getFinishTime();
 
 }

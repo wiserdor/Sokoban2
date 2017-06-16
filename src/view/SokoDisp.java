@@ -19,7 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class SokoDisp extends Canvas implements Initializable {
+public class SokoDisp extends Canvas implements Initializable{
 
 	private Character[][] maze;
 	boolean isWin;
@@ -30,7 +30,7 @@ public class SokoDisp extends Canvas implements Initializable {
 	Image bone = null;
 	Image floor = null;
 	Image kinder = null;
-	
+
 	public SokoDisp() {
 		isWin = false;
 		try {
@@ -107,7 +107,7 @@ public class SokoDisp extends Canvas implements Initializable {
 		if (maze != null) {
 
 			GraphicsContext gc = this.getGraphicsContext2D();
-			
+
 			double W = getWidth();
 			double H = getHeight();
 			double w = W / maze[0].length;
@@ -132,35 +132,12 @@ public class SokoDisp extends Canvas implements Initializable {
 	public void drawWin() {
 		isWin = true;
 		redraw();
-		Alert alert = new Alert(AlertType.CONFIRMATION, "Would you like to submit your score?", ButtonType.YES, ButtonType.NO);
-		alert.showAndWait();
-		if (alert.getResult() == ButtonType.YES) {
-			getLeaderBoard();
-		}
-		
-	}
-	public void getLeaderBoard() {
-		Platform.runLater(new Runnable() {
-	        @Override
-	        public void run() {
-	        	try {
-	    			FXMLLoader fl = new FXMLLoader(getClass().getResource("LeaderBoard.fxml"));
-	    			Parent root1=(Parent)fl.load();
-	    			Stage stage=new Stage();
-	    			stage.setTitle("Leaders");
-	    			stage.setScene(new Scene(root1));
-	    			stage.show();
-	    		} catch (IOException e) {
-	    			// TODO Auto-generated catch block
-	    			System.out.println("can't open window");
-	    		}                             
-	        }
-	   });
 		
 	}
 
+
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
 	}

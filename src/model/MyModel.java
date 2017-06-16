@@ -91,4 +91,11 @@ public class MyModel extends Observable implements Model {
 		return l.getSteps();
 	}
 
+	public void setFinishTime(Double finishTime) {
+		l.setFinishTime(finishTime);
+	}
+	public void getFinishTime(Double finishTime){
+		l.getFinishTime();
+	}
+
 }

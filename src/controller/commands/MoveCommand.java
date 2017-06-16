@@ -34,6 +34,7 @@ public class MoveCommand extends Commands {
 			if (model.isFinished()) {
 				try {
 					view.setWin();
+					model.setFinishTime(view.getFinishTime());
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
