@@ -18,9 +18,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -37,7 +37,6 @@ public class MainWindowController extends Observable implements View {
 	Label stepsLbl;
 	@FXML
 	Text timerLbl;
-
 	private Double counter = new Double(0);
 	private StringProperty countString; // timer string
 	private boolean countFlag = true; // responsible for timer stoping
@@ -50,6 +49,7 @@ public class MainWindowController extends Observable implements View {
 	private Media winMp3 = new Media(new File("./resources/win.mp3").toURI().toString());
 	private MediaPlayer player = new MediaPlayer(startMp3);
 	private MediaPlayer finished = new MediaPlayer(winMp3);
+	private String levelName;
 
 	public MainWindowController() {
 		win = false;
@@ -57,6 +57,22 @@ public class MainWindowController extends Observable implements View {
 		sokoDisp = new SokoDisp();
 		
 
+	}
+
+	public int getSteps() {
+		return steps;
+	}
+
+	public void setSteps(int steps) {
+		this.steps = steps;
+	}
+
+	public String getLevelName() {
+		return levelName;
+	}
+
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
 	}
 
 	public void resetTimer() { // reset the game timer
@@ -129,6 +145,7 @@ public class MainWindowController extends Observable implements View {
 		fc.setInitialDirectory(new File("./Levels"));
 		File chosen = fc.showOpenDialog(null);
 		if (chosen != null) {
+			this.levelName=chosen.getName();
 			sokoDisp.setDisable(false);
 			if (win == true) {
 				sokoDisp.isWin = false;
@@ -217,13 +234,17 @@ public class MainWindowController extends Observable implements View {
 	}
 
 	public void getLeaderBoard() {
+		
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
+					
 					FXMLLoader fl = new FXMLLoader(getClass().getResource("LeaderBoard.fxml"));
 					Parent root1 = (Parent) fl.load();
 					Stage stage = new Stage();
+					LeaderBoardController controller=fl.<LeaderBoardController>getController();
+					controller.initVariable(levelName, steps, counter);
 					stage.setTitle("Leaders");
 					stage.setScene(new Scene(root1));
 					stage.show();

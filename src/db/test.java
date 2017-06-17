@@ -17,7 +17,7 @@ public class test {
 		
 		 DbManager db= new DbManager(factory);
 	     //DbManager.addLevelUsers("levelName", "carmi", 0.2, 4);
-		DbManager.printAllUsersBySteps("carmi");
+		//DbManager.printAllUsersBySteps("carmi");
 	}
 
 }
