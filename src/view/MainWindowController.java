@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -42,22 +43,24 @@ public class MainWindowController extends Observable implements View {
 	private boolean countFlag = true; // responsible for timer stoping
 	private boolean timerFlag = false; // timer is on
 	private Timer timerThread = new Timer();; // timer
-
 	private int steps;
 	boolean win;
-	private Media startMp3 = new Media(new File("./resources/start1.mp3").toURI().toString());
-	private Media winMp3 = new Media(new File("./resources/win.mp3").toURI().toString());
+	String path=new File(".").getAbsolutePath();
+	private Media startMp3 = new Media(new File(path+"/resources/start1.mp3").toURI().toString());
+	private Media winMp3 = new Media(new File(path+"/resources/win.mp3").toURI().toString());
 	private MediaPlayer player = new MediaPlayer(startMp3);
 	private MediaPlayer finished = new MediaPlayer(winMp3);
 	private String levelName;
 
 	public MainWindowController() {
 		win = false;
+
 		
 		sokoDisp = new SokoDisp();
 		
 
 	}
+
 
 	public int getSteps() {
 		return steps;

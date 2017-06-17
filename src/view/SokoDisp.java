@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,47 +31,48 @@ public class SokoDisp extends Canvas implements Initializable{
 	Image bone = null;
 	Image floor = null;
 	Image kinder = null;
+	String path=new File(".").getAbsolutePath();
 
 	public SokoDisp() {
 		isWin = false;
 		try {
-			wall = new Image(new FileInputStream("./resources/bush.jpg"));
+			wall = new Image(new FileInputStream(path+"/resources/bush.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			pitHole = new Image(new FileInputStream("./resources/pithole2.jpg"));
+			pitHole = new Image(new FileInputStream(path+"/resources/pithole2.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			bonePitHole = new Image(new FileInputStream("./resources/dog.jpg"));
+			bonePitHole = new Image(new FileInputStream(path+"/resources/dog.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			bone = new Image(new FileInputStream("./resources/b.jpg"));
+			bone = new Image(new FileInputStream(path+"/resources/b.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			floor = new Image(new FileInputStream("./resources/floor.jpg"));
+			floor = new Image(new FileInputStream(path+"/resources/floor.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			kinder = new Image(new FileInputStream("./resources/Kinder.jpg"));
+			kinder = new Image(new FileInputStream(path+"/resources/Kinder.jpg"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			win = new Image(new FileInputStream("./resources/Win.png"));
+			win = new Image(new FileInputStream(path+"/resources/Win.png"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
